@@ -47,13 +47,13 @@
     .balloon {
       position: absolute;
       bottom: -150px;
-      width: 80px;
-      animation: floatUp 6s infinite ease-in-out;
+      width: 90px; /* Bigger */
+      animation: floatUp 7s infinite ease-in-out;
     }
 
     @keyframes floatUp {
       0% { transform: translateY(0); opacity:1; }
-      100% { transform: translateY(-120vh); opacity:0; }
+      100% { transform: translateY(-130vh); opacity:0; }
     }
 
     header {
@@ -68,18 +68,20 @@
       color: #ff4b5c;
     }
 
-    /* Carousel images */
+    /* Larger Images */
     .carousel-item img {
-      height: 500px;
+      height: 650px;   /* Increased height */
       object-fit: cover;
       width: 100%;
+      border-radius: 15px;
     }
 
     .carousel-caption {
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.85);
       color: #333;
       border-radius: 10px;
-      padding: 15px;
+      padding: 20px;
+      font-size: 1.1em;
       bottom: 20px;
       width: 80%;
       left: 50%;
@@ -88,14 +90,18 @@
 
     /* Scrollable final message */
     .final-message {
-      max-height: 300px;
+      max-height: 350px;
       overflow-y: auto;
-      background: rgba(255,255,255,0.85);
-      margin: 20px;
+      background: rgba(255,255,255,0.9);
+      margin: 25px;
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       transition: opacity 0.5s ease-in-out;
+    }
+
+    .final-message h2 {
+      color: #ff4b5c;
     }
 
     footer {
@@ -133,52 +139,38 @@
       <div class="carousel-inner">
 
         <div class="carousel-item active">
-          <img src="PICTURES/pic1.jpeg" class="d-block" alt="Laboratory memory">
-          <div class="carousel-caption">
-            Remember this? When we were in the laboratory, you tried to kiss me but ma'am came. Such a funny memory I will never forget.
-          </div>
+          <img src="PICTURES/pic1.jpeg" class="d-block" alt="">
+          <div class="carousel-caption"></div>
         </div>
 
         <div class="carousel-item">
-          <img src="PICTURES/pic2.jpg" class="d-block" alt="Funny moment">
-          <div class="carousel-caption">
-            This moment caught my attention because I didn’t realize it was you. Funny, right? Another memory to laugh about.
-          </div>
+          <img src="PICTURES/pic2.jpg" class="d-block" alt="">
+          <div class="carousel-caption"></div>
         </div>
 
         <div class="carousel-item">
-          <img src="PICTURES/pic3.jpeg" class="d-block" alt="Old friend">
-          <div class="carousel-caption">
-            I got this from your old friend. It brings back memories and makes me smile every time.
-          </div>
+          <img src="PICTURES/pic3.jpeg" class="d-block" alt="">
+          <div class="carousel-caption"></div>
         </div>
 
         <div class="carousel-item">
-          <img src="PICTURES/pic4.jpeg" class="d-block" alt="Birthday question">
-          <div class="carousel-caption">
-            Is this my birthday? I still remember feeling surprised and happy that day.
-          </div>
+          <img src="PICTURES/pic4.jpeg" class="d-block" alt="">
+          <div class="carousel-caption"></div>
         </div>
 
         <div class="carousel-item">
-          <img src="PICTURES/pic5.jpg" class="d-block" alt="Joyride memory">
-          <div class="carousel-caption">
-            When we went on a joyride, we laughed so much. Another fun ride together that I will cherish.
-          </div>
+          <img src="PICTURES/pic5.jpg" class="d-block" alt="">
+          <div class="carousel-caption"></div>
         </div>
 
         <div class="carousel-item">
-          <img src="PICTURES/pic6.jpg" class="d-block" alt="Last joyride">
-          <div class="carousel-caption">
-            This was our last joyride before I got here. A memorable adventure I will always remember.
-          </div>
+          <img src="PICTURES/pic6.jpg" class="d-block" alt="">
+          <div class="carousel-caption"></div>
         </div>
 
         <div class="carousel-item">
-          <img src="PICTURES/pic7.jpg" class="d-block" alt="Final memory">
-          <div class="carousel-caption">
-            Another unforgettable memory together. Every moment with you is special, and I will always treasure it.
-          </div>
+          <img src="PICTURES/pic7.jpg" class="d-block" alt="">
+          <div class="carousel-caption"></div>
         </div>
 
       </div>
@@ -195,18 +187,11 @@
     <!-- Scrollable Final Message -->
     <div class="final-message" id="specialMessage">
       <h2>Special Message</h2>
-      <p id="messageText">
-        Happy 18th Birthday! You have always been someone who brings joy and happiness to every moment.  
-        I am grateful for all the laughter, memories, and adventures we’ve shared.  
-        May this new chapter of your life be filled with success, love, and unforgettable experiences.  
-        I will always be here, supporting you, cheering for you, and celebrating your milestones.  
-        You deserve nothing but the best because you are truly amazing.  
-        Thank you for being a wonderful friend and a part of my life. Cheers to many more memories together!
-      </p>
+      <p id="messageText"></p>
     </div>
 
     <footer>
-      Made with love by your best friend
+      Made with love ♥
     </footer>
   </div>
 
@@ -220,26 +205,60 @@
       window.scrollTo(0,0);
     }
 
-    const messages = [
-      "Remember this? When we were in the laboratory, you tried to kiss me but ma'am came. Such a funny memory I will never forget.",
-      "This moment caught my attention because I didn’t realize it was you. Funny, right? Another memory to laugh about.",
-      "I got this from your old friend. It brings back memories and makes me smile every time.",
-      "Is this my birthday? I still remember feeling surprised and happy that day.",
-      "When we went on a joyride, we laughed so much. Another fun ride together that I will cherish.",
-      "This was our last joyride before I got here. A memorable adventure I will always remember.",
-      "Another unforgettable memory together. Every moment with you is special, and I will always treasure it."
+    /* DIFFERENT CAPTIONS FOR EACH PICTURE */
+    const captions = [
+      "Remember this? When we were in the laboratory and we were laughing so much over something small. One of the funniest days ever.",
+      "This picture caught me off guard—di ko agad namukhaan na ikaw pala. Sobrang cute at nakakatuwa!",
+      "Your old friend sent me this, and it still makes me smile every time I see it.",
+      "Is this my birthday? I still remember how surprised and happy we both were that day.",
+      "Our joyride—grabe tawa natin non. One of the moments I’ll always carry with me.",
+      "Our last joyride before everything changed. A memory that still feels warm.",
+      "A picture full of memories. Every moment with you was something special."
+    ];
+
+    /* DIFFERENT SPECIAL MESSAGES FOR EACH PICTURE */
+    const specialMessages = [
+      `Hi my once-to-call MY LOVE, MY BABY, MY WIFEY, MY HONEY, MY DARLING, MY TEERAK, MI AMOR.  
+      I just want to say I’m glad I met you. Even though we’re not together anymore, I still don’t want you out of my life.  
+      And I hope, truly hope, that somehow we can still stay connected… maybe in a different way, but still with respect and care.`,
+
+      `I’m sorry if I reacted the wrong way before. When I saw you guys online, I didn’t know why I felt that way—but it wasn’t your fault.  
+      I was confused with my own feelings, and I hope you didn’t carry that as guilt.`,
+
+      `No matter who you choose to stay close with, I’ll always be glad for you. I hope you surround yourself with people who keep you smiling the way you deserve.`,
+
+      `I pray your connections remain strong, real, and safe. And even if I’m not the same person beside you anymore, I’ll still wish for your happiness every single time.`,
+
+      `Thank you for the memories—every laugh, every moment, every story.  
+      You became a part of my life that I will never regret, never forget.`,
+
+      `Life changed, but you being part of my journey is something I’ll always be grateful for.  
+      And even if the chapter ended differently, it doesn’t erase how real it was for me.`,
+
+      `Happy 18th, Maia.  
+      You deserve love, peace, joy, and people who choose you genuinely.  
+      And even from a distance… I will always pray you find everything you’re looking for.`
     ];
 
     const carousel = document.getElementById('birthdayCarousel');
+    const captionBoxes = document.querySelectorAll('.carousel-caption');
     const messageText = document.getElementById('messageText');
+
+    // Initialize default captions and message
+    captionBoxes.forEach((cap, i) => {
+      cap.innerText = captions[i];
+    });
+    messageText.innerText = specialMessages[0];
 
     carousel.addEventListener('slid.bs.carousel', function (event) {
       const index = event.to;
+
+      // Update special message with fade effect
       messageText.style.opacity = 0;
       setTimeout(() => {
-        messageText.innerText = messages[index];
+        messageText.innerHTML = specialMessages[index];
         messageText.style.opacity = 1;
-      }, 250); // smooth fade effect
+      }, 250);
     });
   </script>
 

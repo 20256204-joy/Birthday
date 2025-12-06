@@ -70,7 +70,7 @@
 
     /* Carousel images */
     .carousel-item img {
-      height: 500px; /* Large images */
+      height: 500px;
       object-fit: cover;
       width: 100%;
     }
@@ -95,6 +95,7 @@
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: opacity 0.5s ease-in-out;
     }
 
     footer {
@@ -192,9 +193,9 @@
     </div>
 
     <!-- Scrollable Final Message -->
-    <div class="final-message">
+    <div class="final-message" id="specialMessage">
       <h2>Special Message</h2>
-      <p>
+      <p id="messageText">
         Happy 18th Birthday! You have always been someone who brings joy and happiness to every moment.  
         I am grateful for all the laughter, memories, and adventures we’ve shared.  
         May this new chapter of your life be filled with success, love, and unforgettable experiences.  
@@ -218,6 +219,28 @@
       document.getElementById("mainContent").style.display = "block";
       window.scrollTo(0,0);
     }
+
+    const messages = [
+      "Remember this? When we were in the laboratory, you tried to kiss me but ma'am came. Such a funny memory I will never forget.",
+      "This moment caught my attention because I didn’t realize it was you. Funny, right? Another memory to laugh about.",
+      "I got this from your old friend. It brings back memories and makes me smile every time.",
+      "Is this my birthday? I still remember feeling surprised and happy that day.",
+      "When we went on a joyride, we laughed so much. Another fun ride together that I will cherish.",
+      "This was our last joyride before I got here. A memorable adventure I will always remember.",
+      "Another unforgettable memory together. Every moment with you is special, and I will always treasure it."
+    ];
+
+    const carousel = document.getElementById('birthdayCarousel');
+    const messageText = document.getElementById('messageText');
+
+    carousel.addEventListener('slid.bs.carousel', function (event) {
+      const index = event.to;
+      messageText.style.opacity = 0;
+      setTimeout(() => {
+        messageText.innerText = messages[index];
+        messageText.style.opacity = 1;
+      }, 250); // smooth fade effect
+    });
   </script>
 
 </body>

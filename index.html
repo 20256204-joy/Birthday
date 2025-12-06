@@ -16,7 +16,6 @@
       overflow-x: hidden;
     }
 
-    /* Welcome Section */
     .welcome {
       height: 100vh;
       background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
@@ -45,6 +44,25 @@
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    .carousel-item img {
+      height: 500px; /* consistent height */
+      object-fit: cover; /* crop to fit */
+      width: 100%;
+      border-radius: 15px;
+    }
+
+    .carousel-caption {
+      background: rgba(255,255,255,0.85);
+      color: #333;
+      border-radius: 10px;
+      padding: 15px;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
     }
   </style>
 </head>
@@ -53,9 +71,9 @@
 
   <!-- Welcome Page -->
   <div class="welcome" id="welcomePage">
-    <h1>🎉 Happy 18th Birthday, Irish “Maia” Kha! 🎂</h1>
-    <p>Click to see your surprise!</p>
-    <button class="btn btn-light btn-lg text-danger fw-bold" onclick="showContent()">💖 Continue 💖</button>
+    <h1>Happy 18th Birthday, Irish “Maia” Kha!</h1>
+    <p>Click to see your surprise</p>
+    <button class="btn btn-light btn-lg text-danger fw-bold" onclick="showContent()">Continue</button>
   </div>
 
   <!-- Balloons -->
@@ -67,8 +85,8 @@
   <div id="mainContent" style="display:none;">
 
     <header class="text-center py-4 bg-white bg-opacity-75 shadow-sm">
-      <h1 class="text-danger fw-bold">💐 Happy 18th Birthday, Irish “Maia” Kha 💐</h1>
-      <p class="text-secondary fs-5">Wishing you joy, love, and happiness!</p>
+      <h1 class="text-danger fw-bold">Happy 18th Birthday, Irish “Maia” Kha</h1>
+      <p class="text-secondary fs-5">Wishing you joy, love, and happiness</p>
     </header>
 
     <!-- BOOTSTRAP CAROUSEL -->
@@ -78,40 +96,60 @@
         <div class="carousel-inner">
 
           <div class="carousel-item active">
-            <img src="PICTURES/pic1.jpeg" class="d-block w-100 rounded shadow">
+            <img src="PICTURES/pic1.jpeg" class="d-block">
+            <div class="carousel-caption">
+              <p>This was a fun day we spent together during our summer trip.</p>
+            </div>
           </div>
 
           <div class="carousel-item">
-            <img src="PICTURES/pic2.jpg" class="d-block w-100 rounded shadow">
+            <img src="PICTURES/pic2.jpg" class="d-block">
+            <div class="carousel-caption">
+              <p>This moment captures our laughter and joy at the party.</p>
+            </div>
           </div>
 
           <div class="carousel-item">
-            <img src="PICTURES/pic3.jpeg" class="d-block w-100 rounded shadow">
+            <img src="PICTURES/pic3.jpeg" class="d-block">
+            <div class="carousel-caption">
+              <p>A memory we will always cherish with our friends.</p>
+            </div>
           </div>
 
           <div class="carousel-item">
-            <img src="PICTURES/pic4.jpeg" class="d-block w-100 rounded shadow">
+            <img src="PICTURES/pic4.jpeg" class="d-block">
+            <div class="carousel-caption">
+              <p>This was a relaxing day full of smiles and fun moments.</p>
+            </div>
           </div>
 
           <div class="carousel-item">
-            <img src="PICTURES/pic5.jpg" class="d-block w-100 rounded shadow">
+            <img src="PICTURES/pic5.jpg" class="d-block">
+            <div class="carousel-caption">
+              <p>Celebrating small victories and making big memories.</p>
+            </div>
           </div>
 
           <div class="carousel-item">
-            <img src="PICTURES/pic6.jpg" class="d-block w-100 rounded shadow">
+            <img src="PICTURES/pic6.jpg" class="d-block">
+            <div class="carousel-caption">
+              <p>One of our unforgettable adventures together.</p>
+            </div>
           </div>
 
           <div class="carousel-item">
-            <img src="PICTURES/pic7.jpg" class="d-block w-100 rounded shadow">
+            <img src="PICTURES/pic7.jpg" class="d-block">
+            <div class="carousel-caption">
+              <p>Closing the year with laughter and beautiful memories.</p>
+            </div>
           </div>
 
         </div>
 
-        <!-- SLIDE BUTTONS -->
+        <!-- Carousel Controls -->
         <button class="carousel-control-prev" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon"></span>
         </button>
-
         <button class="carousel-control-next" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="next">
           <span class="carousel-control-next-icon"></span>
         </button>
@@ -119,25 +157,21 @@
       </div>
     </div>
 
-    <!-- MESSAGE -->
+    <!-- GENERAL MESSAGE -->
     <div class="container pb-5">
       <div class="message-box text-center mx-auto">
-        <h2 class="text-danger fw-bold">💖 Special Message 💖</h2>
-        <p class="mt-3">
-          Happy 18th Birthday, my best friend! 🎉  
-          You’ve always been someone who brings joy to every moment, and I’m incredibly grateful for the memories we share.  
-          <br><br>
-          Welcome to adulthood — a new chapter full of opportunities, lessons, and unforgettable moments.  
-          <br><br>
-          I’ll always be here for you, cheering you on.  
-          <br><br>
-          Happy 18th, my forever bestie! 🥰🎂🎈
+        <h2 class="text-danger fw-bold">Special Message</h2>
+        <p>
+          Happy 18th Birthday! You have always brought joy and happiness into every moment.  
+          I am grateful for all the memories we share and the laughter we’ve had together.  
+          Welcome to this new chapter full of opportunities, lessons, and unforgettable experiences.  
+          I will always be here cheering for you and supporting you in every step.
         </p>
       </div>
     </div>
 
     <footer class="text-center py-3 bg-white bg-opacity-50">
-      Made with ❤️ by your best friend
+      Made with love by your best friend
     </footer>
 
   </div>

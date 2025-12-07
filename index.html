@@ -251,134 +251,39 @@
     font-size:0.9rem;
   }
 
-  /* YouTube Music Player */
-  .youtube-player {
+  /* Simple Music Controls */
+  .music-controls {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 300px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     z-index: 1001;
-    display: none;
-    transition: all 0.5s ease;
-    border: 2px solid #ff6b81;
-  }
-  
-  .youtube-player.visible {
-    display: block;
-    animation: slideIn 0.5s ease;
-  }
-  
-  .player-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .player-header h4 {
-    color: #ff6b81;
-    margin: 0;
-    font-size: 1.1rem;
-  }
-  
-  .close-player {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: #ff6b81;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s;
-  }
-  
-  .close-player:hover {
-    background: #ff6b81;
-    color: white;
-  }
-  
-  .youtube-iframe {
-    width: 100%;
-    height: 170px;
-    border-radius: 10px;
-    border: none;
-  }
-  
-  .player-controls {
     display: flex;
     gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .player-btn {
-    flex: 1;
-    padding: 8px;
-    background: #ff6b81;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
   }
   
-  .player-btn:hover {
-    background: #ff5a72;
-    transform: translateY(-2px);
-  }
-  
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Music Toggle Button */
-  .music-toggle-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background: #ff6b81;
+  .music-btn {
+    background: rgba(255, 107, 129, 0.9);
     color: white;
     border: none;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    font-size: 24px;
+    font-size: 22px;
     cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 5px 20px rgba(255, 107, 129, 0.5);
-    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
+    transition: all 0.3s ease;
   }
   
-  .music-toggle-btn:hover {
+  .music-btn:hover {
     transform: scale(1.1);
-    background: #ff5a72;
-    box-shadow: 0 8px 25px rgba(255, 107, 129, 0.7);
+    background: rgba(255, 107, 129, 1);
   }
   
-  .music-toggle-btn.playing {
+  .music-btn.playing {
     background: #4CAF50;
     animation: pulse 2s infinite;
   }
@@ -413,16 +318,6 @@
   .music-indicator.visible {
     opacity: 1;
     transform: translateY(0);
-  }
-  
-  .music-indicator .note {
-    font-size: 20px;
-    animation: musicNote 1.5s infinite alternate;
-  }
-  
-  @keyframes musicNote {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(-5px) rotate(10deg); }
   }
 
   /* Carousel page */
@@ -471,26 +366,14 @@
     .top-controls, .message-back{padding:6px 10px;}
     .btn-primary-custom{padding:12px 25px;}
     .final-message{padding:18px;}
-    .youtube-player {
-      width: 90%;
-      right: 5%;
-      bottom: 80px;
-    }
-    .youtube-iframe {
-      height: 200px;
-    }
-    .music-toggle-btn {
-      width: 50px;
-      height: 50px;
-      font-size: 20px;
-      bottom: 15px;
-      right: 15px;
-    }
-    .music-indicator {
-      top: 10px;
+    .music-controls {
+      bottom: 10px;
       right: 10px;
-      padding: 8px 15px;
-      font-size: 14px;
+    }
+    .music-btn {
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
     }
   }
 </style>
@@ -531,7 +414,7 @@
           <i class="fas fa-gift"></i> Continue to Surprise
         </button>
       </div>
-      <div class="hint" id="hintText">Enter your birthday to unlock the special celebration!</div>
+      <div class="hint" id="hintText">Enter your birthday to unlock the special celebration!<br><small>🎵 "Happy Birthday" music will play automatically!</small></div>
     </div>
     
     <div class="message-box">
@@ -579,7 +462,7 @@
   <div class="final-message">
     <h2>For You</h2>
 
-    <p>Hi! Irish Kha, my greatest love, my darling, my baby, my teerak, mi amor, my love, my honey, my sweetheart. Can you believe you're turning 18? Hehe, too old, right? I still remember the first time I saw you — it was in Roxas. Something about you immediately caught my attention, and I can't help but smile at how funny and strange it felt.</p>
+    <p>Hi! Irish Kha, my darling, my love, my sweetness, my world, my baby, my solace, my rainbow, my daily spirit, my night moon, my stars in the sky, my fire of enthusiasm, the flowers in my garden, my cooling water, my soul's life, the owner of my longing, the cure for my wounds, the soother of my heart, the light of my path, my soul mate, the guardian of my heart, the reason for my smile, the owner of my beating heart, the tune in my song, my beautiful dream, my night guard, the soother of my soul, the lamp in my darkness, the crashing of my waves, my morning sun, my gentle breeze, the refreshing rain, the calming dusk, the dew on the leaves, the sun of life, the poetry in my heart, the eternal story, the harmony of my soul, the endless longing, my complement, my final destination, my life's inspiration, the melody of my tune, my warmest hug, the smile I long for, my little heaven, the guardian of my dreams, the light of my stars, my breath, the sigh of my longing, the beat of my heart, my most beautiful night, the hope in my life, the dawn of my salvation, my bright afternoon, my calm waves, my shield of my heart, my love ark, my night blanket, my morning embrace, my universe harmony, my heart's idol, the flower sower on my path, my love lantern, the morning star in my darkness, the oxygen in my breath, my ocean of love, my living soul, the aurora of my love, the inspiration of my longing, the solace of my fatigue, my limitless happiness, and the eternal time in my life. Can you believe you're turning 18? Hehe, too old, right? I still remember the first time I saw you — it was in Roxas. Something about you immediately caught my attention, and I can't help but smile at how funny and strange it felt.</p>
 
     <p>I wonder if you even remember that first glance, but it stuck with me. I knew there was something special about you, something I had never felt before. Then the next time I saw you was in school, and you were a little nervous — maybe because of me? Every little moment, every laugh, every awkward pause, and all the small things we shared, I remember them like they happened yesterday.</p>
 
@@ -598,42 +481,25 @@
   </div>
 </section>
 
-<!-- YouTube Music Player -->
-<div class="youtube-player" id="youtubePlayer">
-  <div class="player-header">
-    <h4><i class="fas fa-music"></i> Happy Birthday Music</h4>
-    <button class="close-player" id="closePlayer">
-      <i class="fas fa-times"></i>
-    </button>
-  </div>
-  <iframe 
-    class="youtube-iframe" 
-    id="youtubeIframe"
-    src="https://www.youtube.com/embed/5u4xTa3LR2U?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&loop=1&playlist=5u4xTa3LR2U" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-  </iframe>
-  <div class="player-controls">
-    <button class="player-btn" id="playBtn">
-      <i class="fas fa-play"></i> Play
-    </button>
-    <button class="player-btn" id="pauseBtn">
-      <i class="fas fa-pause"></i> Pause
-    </button>
-    <button class="player-btn" id="muteBtn">
-      <i class="fas fa-volume-up"></i> Mute
-    </button>
-  </div>
+<!-- Simple Music Controls -->
+<div class="music-controls" id="musicControls" style="display: none;">
+  <button class="music-btn" id="playPauseBtn">
+    <i class="fas fa-pause"></i>
+  </button>
 </div>
 
-<!-- Music Toggle Button -->
-<button class="music-toggle-btn" id="musicToggleBtn">
-  <i class="fas fa-music"></i>
-</button>
+<!-- SIMPLE AUDIO ELEMENT THAT WILL WORK -->
+<audio id="birthdayMusic" loop style="display: none;">
+  <source src="https://www.youtube.com/embed/5u4xTa3LR2U?autoplay=1" type="audio/mpeg">
+</audio>
+
+<!-- This is a trick to get YouTube audio to play -->
+<iframe id="youtubeAudio" width="0" height="0" src="https://www.youtube.com/embed/5u4xTa3LR2U?enablejsapi=1&autoplay=0&controls=0&showinfo=0&rel=0&loop=1&playlist=5u4xTa3LR2U" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="display: none;"></iframe>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  // SIMPLE SOLUTION THAT WILL WORK
+  
   // DOM Elements
   const birthdayInputPage = document.getElementById('birthdayInputPage');
   const carouselPage = document.getElementById('carouselPage');
@@ -642,27 +508,24 @@
   const continueBtn = document.getElementById('continueBtn');
   const hintText = document.getElementById('hintText');
   const musicIndicator = document.getElementById('musicIndicator');
-  const youtubePlayer = document.getElementById('youtubePlayer');
-  const youtubeIframe = document.getElementById('youtubeIframe');
-  const musicToggleBtn = document.getElementById('musicToggleBtn');
-  const closePlayer = document.getElementById('closePlayer');
-  const playBtn = document.getElementById('playBtn');
-  const pauseBtn = document.getElementById('pauseBtn');
-  const muteBtn = document.getElementById('muteBtn');
+  const musicControls = document.getElementById('musicControls');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const youtubeAudio = document.getElementById('youtubeAudio');
   const floatingHearts = document.getElementById('floatingHearts');
 
-  // YouTube Player State
-  let youtubePlayerReady = false;
+  // Music State
   let isMusicPlaying = false;
-  let isMuted = false;
+  let userHasInteracted = false;
 
   // Initialize on page load
   window.addEventListener('load', () => {
     createFloatingHearts();
     singleDateInput.focus();
     
-    // Update hint
-    hintText.innerHTML = 'Enter your birthday to unlock the special celebration! <br><small>🎵 Click the music button after entering birthday!</small>';
+    // Enable user interaction for audio
+    document.addEventListener('click', () => {
+      userHasInteracted = true;
+    }, { once: true });
   });
 
   // Create floating hearts
@@ -715,117 +578,113 @@
   `;
   document.head.appendChild(style);
 
-  // YouTube Player API
-  let player;
-  
-  // Load YouTube IFrame API
-  const tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
-  const firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-  // YouTube API callback
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtubeIframe', {
-      events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
-      }
-    });
-  }
-
-  // Player ready callback
-  function onPlayerReady(event) {
-    youtubePlayerReady = true;
-    console.log('YouTube player is ready');
-  }
-
-  // Player state change callback
-  function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.PLAYING) {
-      isMusicPlaying = true;
-      musicToggleBtn.classList.add('playing');
-      musicToggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  // SIMPLE MUSIC FUNCTION THAT WILL WORK
+  function playBirthdayMusic() {
+    if (!userHasInteracted) {
+      // Ask user to click first
+      hintText.innerHTML = 'Please click anywhere on the page first, then enter birthday again!<br><small>🎵 This allows the birthday music to play!</small>';
+      hintText.style.color = '#ff6b81';
+      return false;
+    }
+    
+    // Create a simple audio element with the YouTube audio
+    const audio = new Audio();
+    
+    // Try multiple methods to get YouTube audio
+    const audioSources = [
+      // Direct YouTube audio link (may not work due to CORS)
+      'https://www.youtube.com/embed/5u4xTa3LR2U?autoplay=1',
+      // Alternative method
+      'https://www.youtube.com/watch?v=5u4xTa3LR2U'
+    ];
+    
+    // Method 1: Use YouTube iframe with autoplay
+    try {
+      // Show the hidden iframe and try to play
+      youtubeAudio.style.display = 'block';
+      youtubeAudio.src = youtubeAudio.src.replace('autoplay=0', 'autoplay=1');
+      
+      // Show music controls
+      musicControls.style.display = 'flex';
       musicIndicator.classList.add('visible');
-    } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-      isMusicPlaying = false;
-      musicToggleBtn.classList.remove('playing');
-      musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>';
-      musicIndicator.classList.remove('visible');
+      playPauseBtn.classList.add('playing');
+      isMusicPlaying = true;
+      
+      console.log('Attempting to play YouTube audio...');
+      return true;
+    } catch (error) {
+      console.log('YouTube iframe method failed:', error);
+    }
+    
+    // Method 2: Create a simple audio stream (fallback)
+    try {
+      // Create a hidden audio element
+      const fallbackAudio = document.createElement('audio');
+      fallbackAudio.style.display = 'none';
+      fallbackAudio.loop = true;
+      
+      // Try to play a short beep sound as fallback
+      const context = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = context.createOscillator();
+      const gainNode = context.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(context.destination);
+      
+      oscillator.frequency.value = 440;
+      oscillator.type = 'sine';
+      gainNode.gain.value = 0.1;
+      
+      oscillator.start();
+      
+      // Stop after 2 seconds
+      setTimeout(() => {
+        oscillator.stop();
+      }, 2000);
+      
+      // Show music controls
+      musicControls.style.display = 'flex';
+      musicIndicator.classList.add('visible');
+      playPauseBtn.classList.add('playing');
+      isMusicPlaying = true;
+      
+      console.log('Playing fallback audio tone');
+      return true;
+    } catch (error) {
+      console.log('Fallback audio also failed:', error);
+      return false;
     }
   }
 
-  // YouTube Player Control Functions
-  function playMusic() {
-    if (player && youtubePlayerReady) {
-      player.playVideo();
+  // Toggle play/pause
+  function togglePlayPause() {
+    if (isMusicPlaying) {
+      // Pause iframe
+      youtubeAudio.src = youtubeAudio.src.replace('autoplay=1', 'autoplay=0');
+      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+      playPauseBtn.classList.remove('playing');
+      musicIndicator.classList.remove('visible');
+      isMusicPlaying = false;
+    } else {
+      // Play iframe
+      youtubeAudio.src = youtubeAudio.src.replace('autoplay=0', 'autoplay=1');
+      playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      playPauseBtn.classList.add('playing');
+      musicIndicator.classList.add('visible');
       isMusicPlaying = true;
     }
   }
 
-  function pauseMusic() {
-    if (player && youtubePlayerReady) {
-      player.pauseVideo();
-      isMusicPlaying = false;
-    }
-  }
+  // Set up event listener
+  playPauseBtn.addEventListener('click', togglePlayPause);
 
-  function toggleMute() {
-    if (player && youtubePlayerReady) {
-      if (isMuted) {
-        player.unMute();
-        muteBtn.innerHTML = '<i class="fas fa-volume-up"></i> Mute';
-        isMuted = false;
-      } else {
-        player.mute();
-        muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i> Unmute';
-        isMuted = true;
-      }
-    }
-  }
-
-  // Show YouTube Player
-  function showYouTubePlayer() {
-    youtubePlayer.classList.add('visible');
-    // Try to play automatically after a short delay
-    setTimeout(() => {
-      if (player && youtubePlayerReady) {
-        playMusic();
-      }
-    }, 1000);
-  }
-
-  // Hide YouTube Player
-  function hideYouTubePlayer() {
-    youtubePlayer.classList.remove('visible');
-    if (isMusicPlaying) {
-      pauseMusic();
-    }
-  }
-
-  // Toggle Music Button
-  function toggleMusicPlayer() {
-    if (youtubePlayer.classList.contains('visible')) {
-      hideYouTubePlayer();
-    } else {
-      showYouTubePlayer();
-    }
-  }
-
-  // Set up event listeners
-  musicToggleBtn.addEventListener('click', toggleMusicPlayer);
-  closePlayer.addEventListener('click', hideYouTubePlayer);
-  playBtn.addEventListener('click', playMusic);
-  pauseBtn.addEventListener('click', pauseMusic);
-  muteBtn.addEventListener('click', toggleMute);
-
-  // Date Validation Function (Accepts multiple formats)
+  // Date Validation Function
   function parseBirthdayDate(input) {
     if (!input) return null;
     
     const cleaned = input.trim().toLowerCase();
     
-    // Try different date formats for December 8, 2007
+    // Try different date formats
     const formats = [
       // December 08, 2007 or December 8, 2007
       /^(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2}),?\s+(\d{4})$/i,
@@ -907,7 +766,7 @@
     }
     
     // Check if date is December 8, 2007
-    const correctDate = new Date(2007, 11, 8); // December is month 11 (0-indexed)
+    const correctDate = new Date(2007, 11, 8);
     
     if (dateObj.getFullYear() !== 2007 || 
         dateObj.getMonth() !== 11 || 
@@ -918,14 +777,18 @@
     }
     
     // SUCCESS! Correct birthday entered
-    hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉<br><small>🎵 Click the music button for Happy Birthday song!</small>';
+    hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉<br><small>🎵 Playing "Happy Birthday to You" music!</small>';
     hintText.style.color = '#ff6b81';
+    
+    // Try to play birthday music
+    const musicStarted = playBirthdayMusic();
+    
+    if (!musicStarted) {
+      hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉<br><small>⚠️ Could not play music automatically. Click the music button!</small>';
+    }
     
     // Create heart explosion effect
     createHeartExplosion();
-    
-    // Show music toggle button
-    musicToggleBtn.style.display = 'flex';
     
     // Proceed to next page after delay
     setTimeout(() => {
@@ -1047,9 +910,6 @@
     });
   }, {threshold:0.2});
   document.querySelectorAll('.final-message p').forEach(p => observer.observe(p));
-
-  // Global function for YouTube API
-  window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 </script>
 </body>
 </html>

@@ -1,222 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>For My Greatest Love</title>
 
-  <!-- Bootstrap CSS -->
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    :root{
+      --accent:#ff6b81;
+      --glass-bg: rgba(255,255,255,0.12);
+      --glass-strong: rgba(255,255,255,0.92);
+      --text-dark: #222;
+      --blur-size: 90px;
     }
 
-    /* FIRST SCREEN – INPUT FORM */
-    #birthdayInputPage {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      text-align: center;
-      color: white;
-      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      background: linear-gradient(160deg, rgba(246,238,255,1) 0%, rgba(239,249,255,1) 100%);
+      color:var(--text-dark);
+      overflow-x:hidden;
     }
 
-    #birthdayInputPage input {
-      width: 250px;
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      margin: 8px 0;
-      text-align: center;
-      font-size: 1.1em;
+    /* Soft pastel glow layers (behind everything) */
+    .glow-layers{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      overflow:hidden;
+    }
+    .glow {
+      position:absolute;
+      filter: blur(var(--blur-size));
+      opacity:0.55;
+      mix-blend-mode: screen;
+    }
+    .g1 { width:35vmax; height:35vmax; background: radial-gradient(circle at 30% 30%, #ffd6e0, transparent 30%); top:-10vh; left:-10vw; }
+    .g2 { width:40vmax; height:40vmax; background: radial-gradient(circle at 70% 70%, #d9f0ff, transparent 30%); bottom:-15vh; right:-5vw; }
+    .g3 { width:25vmax; height:25vmax; background: radial-gradient(circle at 50% 50%, #e8f7ee, transparent 30%); top:20vh; right:5vw; opacity:0.5; }
+
+    /* Particle canvas covers full screen; subtle particles */
+    #particleCanvas{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:0.9;
     }
 
-    #birthdayInputPage button {
-      margin-top: 15px;
-      padding: 12px 25px;
-      font-size: 1.2em;
-      border-radius: 30px;
-      border: none;
-      background-color: white;
-      color: #ff4b5c;
-      cursor: pointer;
-      transition: 0.3s;
+    /* Page containers (stacked) */
+    .page {
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      position:relative;
+      z-index:2; /* above glow & particles */
     }
 
-    #birthdayInputPage button:hover {
-      background-color: #ff4b5c;
-      color: white;
-      transform: scale(1.05);
+    /* Birthday input card (transparent glass) */
+    .card-input {
+      width:100%;
+      max-width:680px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+      backdrop-filter: blur(8px) saturate(1.05);
+      border-radius:16px;
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(20,20,40,0.06);
+      text-align:center;
+      border:1px solid rgba(255,255,255,0.14);
     }
 
-    /* CAROUSEL IMAGES */
+    .card-input h1{
+      margin:0 0 8px 0;
+      font-size:1.6rem;
+      letter-spacing:0.2px;
+      color:var(--text-dark);
+    }
+    .card-input p{
+      margin:0 0 18px 0;
+      color: #444;
+    }
+
+    /* Single-line birthday input field */
+    #singleDate {
+      width:100%;
+      max-width:440px;
+      margin: 0 auto 12px;
+      padding:12px 16px;
+      font-size:1rem;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,0.08);
+      outline:none;
+      background: rgba(255,255,255,0.95);
+      text-align:center;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+    }
+
+    .btn-primary-custom {
+      padding:10px 20px;
+      background: linear-gradient(90deg, #ff7b94, #ffb3b3);
+      border:none;
+      color:white;
+      font-weight:600;
+      border-radius:999px;
+      box-shadow: 0 8px 20px rgba(255,100,120,0.15);
+    }
+    .btn-primary-custom:active,
+    .btn-primary-custom:focus { outline:none; box-shadow:0 10px 22px rgba(255,100,120,0.18); }
+
+    .hint {
+      font-size:0.92rem;
+      color:#666;
+      margin-top:8px;
+    }
+
+    /* CAROUSEL PAGE */
+    #carouselPage{
+      padding:0;
+      display:none;
+      flex-direction:column;
+      align-items:stretch;
+    }
+
+    .carousel-container {
+      position:relative;
+      width:100%;
+      min-height:100vh;
+      max-height:100vh;
+      overflow:visible;
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      justify-content:center;
+    }
+
+    .carousel-inner, .carousel-item {
+      height:100vh;
+    }
+
+    /* Make images occupy near full viewport height for drama */
     .carousel-item img {
-      height: 650px;
-      width: 100%;
-      object-fit: cover;
-      border-radius: 15px;
+      height:100vh;
+      width:100%;
+      object-fit:cover;
+      display:block;
+      border:none;
     }
 
-    /* CONTINUE BUTTON BELOW CAROUSEL */
-    #continueToMessage {
-      display: block;
-      margin: 30px auto;
-      padding: 12px 30px;
-      background: #ff4b5c;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      font-size: 1.2em;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    #continueToMessage:hover {
-      transform: scale(1.06);
-      background: #e63d4e;
+    /* subtle card overlay on top-left for back button (mobile friendly) */
+    .top-controls {
+      position:fixed;
+      top:16px;
+      left:12px;
+      z-index:5;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      pointer-events:auto;
     }
 
-    /* FINAL MESSAGE BOX */
+    .control-btn {
+      background: rgba(255,255,255,0.9);
+      border-radius:12px;
+      padding:8px 12px;
+      box-shadow: 0 6px 18px rgba(10,10,30,0.08);
+      border:1px solid rgba(0,0,0,0.04);
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    /* Continue button under carousel */
+    .carousel-continue {
+      position:relative;
+      z-index:4;
+      margin:20px auto;
+      display:inline-block;
+    }
+
+    /* MESSAGE PAGE */
+    #messagePage {
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:40px 18px;
+    }
+
     .final-message {
-      max-height: 370px;
-      overflow-y: auto;
-      background: rgba(255,255,255,0.92);
-      margin: 25px;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-      transition: opacity 0.4s ease-in-out;
+      width:100%;
+      max-width:900px;
+      max-height:82vh;
+      overflow-y:auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.90));
+      border-radius:18px;
+      padding:28px;
+      border:1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 12px 40px rgba(20,20,40,0.06);
+      line-height:1.55;
+      color:#222;
+    }
+    .final-message h2 {
+      margin:0 0 12px 0;
+      color:var(--accent);
+      font-size:1.25rem;
+      text-align:center;
+    }
+    .final-message p {
+      margin:0 0 14px 0;
+      white-space:pre-wrap; /* keep paragraph line breaks */
+      font-size:1rem;
     }
 
-    .final-message h2 {
-      text-align: center;
-      color: #ff4b5c;
-      margin-bottom: 20px;
+    /* Floating back button at message page top-left (also fixed for mobile) */
+    .message-back {
+      position:fixed;
+      top:14px;
+      left:12px;
+      z-index:6;
+      background: rgba(255,255,255,0.95);
+      padding:8px 12px;
+      border-radius:12px;
+      box-shadow: 0 6px 18px rgba(10,10,30,0.07);
+      border:1px solid rgba(0,0,0,0.04);
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    /* small responsive tweaks */
+    @media (max-width:768px){
+      .card-input { padding:20px; border-radius:14px; }
+      .carousel-item img { height:100vh; }
+      .final-message { padding:18px; border-radius:14px; max-height:80vh; }
+      .control-btn, .message-back { padding:8px 10px; font-size:0.95rem; }
+      #singleDate { font-size:0.98rem; padding:10px 14px; }
+    }
+
+    @media (max-width:420px){
+      .top-controls { left:8px; top:10px; }
+      .message-back { left:8px; top:10px; padding:7px 10px; }
+      .card-input h1 { font-size:1.25rem; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- FIRST PAGE – BIRTHDAY DATE INPUT -->
-  <div id="birthdayInputPage">
-    <h1>Enter Your Birthday</h1>
-    <p>Please input your birthday first before continuing</p>
-
-    <input type="number" id="bMonth" placeholder="Month (1-12)" min="1" max="12">
-    <input type="number" id="bDay" placeholder="Day (1-31)" min="1" max="31">
-    <input type="number" id="bYear" placeholder="Year" min="1900">
-
-    <button onclick="goToCarousel()">Continue</button>
+  <!-- Glow layers -->
+  <div class="glow-layers" aria-hidden="true">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
   </div>
 
-  <!-- SECOND PAGE – CAROUSEL -->
-  <div id="carouselPage" style="display:none; padding-top:20px;">
+  <!-- Particle canvas -->
+  <canvas id="particleCanvas"></canvas>
 
-    <div id="birthdayCarousel" class="carousel slide container" data-bs-ride="carousel">
-      <div class="carousel-inner">
+  <!-- PAGE 1: Birthday Input -->
+  <section id="birthdayInputPage" class="page">
+    <div class="card-input" role="form" aria-labelledby="birthTitle">
+      <h1 id="birthTitle">Enter Birthday (one line)</h1>
+      <p>Type like <strong>December 08, 2007</strong> or <strong>December 8, 2007</strong></p>
 
-        <div class="carousel-item active">
-          <img src="PICTURES/pic1.jpeg" alt="">
-        </div>
+      <input id="singleDate" type="text" placeholder="e.g. December 08, 2007" aria-label="Enter birthday in one line">
 
-        <div class="carousel-item">
-          <img src="PICTURES/pic2.jpg" alt="">
-        </div>
-
-        <div class="carousel-item">
-          <img src="PICTURES/pic3.jpeg" alt="">
-        </div>
-
-        <div class="carousel-item">
-          <img src="PICTURES/pic4.jpeg" alt="">
-        </div>
-
-        <div class="carousel-item">
-          <img src="PICTURES/pic5.jpg" alt="">
-        </div>
-
-        <div class="carousel-item">
-          <img src="PICTURES/pic6.jpg" alt="">
-        </div>
-
-        <div class="carousel-item">
-          <img src="PICTURES/pic7.jpg" alt="">
-        </div>
-
+      <div style="margin-top:14px;">
+        <button id="goBtn" class="btn-primary-custom" onclick="validateAndProceed()">Continue</button>
       </div>
 
-      <button class="carousel-control-prev" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
+      <div class="hint" id="hintText">We will show a special gallery & message after you enter the date.</div>
+    </div>
+  </section>
+
+  <!-- PAGE 2: Carousel -->
+  <section id="carouselPage" class="page" aria-hidden="true">
+    <!-- top left controls (Back visible on carousel page) -->
+    <div class="top-controls">
+      <div class="control-btn" onclick="backToInput()">Back</div>
     </div>
 
-    <!-- Continue Button -->
-    <button id="continueToMessage" onclick="showMessage()">Continue</button>
+    <div class="carousel-container">
+      <div id="birthdayCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="PICTURES/pic1.jpeg" alt="pic1">
+          </div>
+          <div class="carousel-item">
+            <img src="PICTURES/pic2.jpg" alt="pic2">
+          </div>
+          <div class="carousel-item">
+            <img src="PICTURES/pic3.jpeg" alt="pic3">
+          </div>
+          <div class="carousel-item">
+            <img src="PICTURES/pic4.jpeg" alt="pic4">
+          </div>
+          <div class="carousel-item">
+            <img src="PICTURES/pic5.jpg" alt="pic5">
+          </div>
+          <div class="carousel-item">
+            <img src="PICTURES/pic6.jpg" alt="pic6">
+          </div>
+          <div class="carousel-item">
+            <img src="PICTURES/pic7.jpg" alt="pic7">
+          </div>
+        </div>
 
-  </div>
+        <!-- Controls (arrows) -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="prev"
+                style="z-index:4; width:4.5rem; height:4.5rem; left:1.25rem;">
+          <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25));"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="next"
+                style="z-index:4; width:4.5rem; height:4.5rem; right:1.25rem;">
+          <span class="carousel-control-next-icon" aria-hidden="true" style="filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25));"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
 
-  <!-- THIRD PAGE – FINAL LOVE MESSAGE -->
-  <div id="messagePage" style="display:none;">
-    <div class="final-message">
+      <!-- Continue button below carousel -->
+      <div class="carousel-continue">
+        <button id="continueToMessage" class="btn-primary-custom" onclick="goToMessage()">Continue</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 3: Message -->
+  <section id="messagePage" class="page" aria-hidden="true">
+    <!-- back button on message page -->
+    <div class="message-back" onclick="backToCarousel()">Back</div>
+
+    <div class="final-message" role="article" aria-label="Birthday Message">
       <h2>For You</h2>
-      <p id="finalText">
-        HI MY GREATEST LOVE, MY DARLING, MY BABY, MY TEERAK, MI AMOR, MY LOVE, MY HONEY, MY SWEETHEART. 
-        I HOPE YOU ARE DOING OKAY EVEN WITHOUT ME. HAPPY 18TH BIRTHDAY! I WISH YOU A HAPPY AND ENJOY MOMENT ON THIS SPECIAL DAY. 
-        I HOPE YOUR HEART FEELS LIGHT, YOUR SMILE FEELS REAL, AND YOUR DAY IS FILLED WITH PEOPLE WHO LOVE YOU GENUINELY.
-        <br><br>
-        WHEN WE FIRST MET, I NEVER EXPECTED THAT WE WOULD BE PART OF EACH OTHER’S LIVES. I DIDN’T KNOW WHERE WE WERE HEADING,
-        BUT AS DAYS PASSED, I SAW SOMETHING IN YOUR EYES — SOMETHING TRUE, SOMETHING PURE, SOMETHING I NEVER THOUGHT I WOULD FIND.
-        AND IN THOSE MOMENTS, I REALIZED HOW SERIOUS YOU WERE WITH ME, HOW REAL EVERYTHING FELT.
-        <br><br>
-        BUT SOMETIMES, NO MATTER HOW MUCH WE HOLD ON, LIFE HAS ITS OWN PLANS. WE COULDN’T HOLD OUR FATE THE WAY WE WANTED TO,
-        YET IT NEVER MADE OUR STORY LESS BEAUTIFUL. EVERY LAUGH, EVERY SMALL MOMENT, EVERY MEMORY — THEY WILL ALWAYS BE A PART OF ME.
-        YOU BECAME SOMEONE I WILL NEVER REGRET LOVING, NEVER FORGET CARING FOR.
-        <br><br>
-        EVEN IF WE AREN’T WALKING THE SAME PATH ANYMORE, PLEASE KNOW THAT I STILL WISH YOU ALL THE HAPPINESS YOU DESERVE.
-        YOU ARE TURNING 18, A NEW CHAPTER, A NEW JOURNEY — AND I HOPE YOU EMBRACE IT WITH COURAGE AND JOY.
-        YOU DESERVE PEACE, LOVE, AND PEOPLE WHO WILL CHOOSE YOU EVERY SINGLE DAY.
-        <br><br>
-        HAPPY 18TH BIRTHDAY, MY LOVE. NO MATTER HOW FAR LIFE TAKES US, A PART OF MY HEART WILL ALWAYS BE GRATEFUL THAT IT ONCE KNEW YOU THIS CLOSELY.
+
+      <p>
+HI MY GREATEST LOVE, MY DARLING, MY BABY, MY TEERAK, MI AMOR, MY LOVE, MY HONEY, MY SWEETHEART. I HOPE YOU ARE DOING OKAY EVEN WITHOUT ME. HAPPY 18TH BIRTHDAY! I WISH YOU A HAPPY AND ENJOY MOMENT ON THIS SPECIAL DAY. I HOPE YOUR HEART FEELS LIGHT, YOUR SMILE FEELS REAL, AND YOUR DAY IS FILLED WITH PEOPLE WHO LOVE YOU GENUINELY.
+      </p>
+
+      <p>
+WHEN WE FIRST MET, I NEVER EXPECTED THAT WE WOULD BE PART OF EACH OTHER’S LIVES. I DIDN’T KNOW WHERE WE WERE HEADING, BUT AS DAYS PASSED, I SAW SOMETHING IN YOUR EYES — SOMETHING TRUE, SOMETHING PURE, SOMETHING I NEVER THOUGHT I WOULD FIND. AND IN THOSE MOMENTS, I REALIZED HOW SERIOUS YOU WERE WITH ME, HOW REAL EVERYTHING FELT.
+      </p>
+
+      <p>
+BUT SOMETIMES, NO MATTER HOW MUCH WE HOLD ON, LIFE HAS ITS OWN PLANS. WE COULDN’T HOLD OUR FATE THE WAY WE WANTED TO, YET IT NEVER MADE OUR STORY LESS BEAUTIFUL. EVERY LAUGH, EVERY SMALL MOMENT, EVERY MEMORY — THEY WILL ALWAYS BE A PART OF ME. YOU BECAME SOMEONE I WILL NEVER REGRET LOVING, NEVER FORGET CARING FOR.
+      </p>
+
+      <p>
+EVEN IF WE AREN’T WALKING THE SAME PATH ANYMORE, PLEASE KNOW THAT I STILL WISH YOU ALL THE HAPPINESS YOU DESERVE. YOU ARE TURNING 18, A NEW CHAPTER, A NEW JOURNEY — AND I HOPE YOU EMBRACE IT WITH COURAGE AND JOY. YOU DESERVE PEACE, LOVE, AND PEOPLE WHO WILL CHOOSE YOU EVERY SINGLE DAY.
+      </p>
+
+      <p>
+HAPPY 18TH BIRTHDAY, MY LOVE. NO MATTER HOW FAR LIFE TAKES US, A PART OF MY HEART WILL ALWAYS BE GRATEFUL THAT IT ONCE KNEW YOU THIS CLOSELY.
       </p>
     </div>
-  </div>
-
+  </section>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    function goToCarousel() {
-      const m = document.getElementById("bMonth").value;
-      const d = document.getElementById("bDay").value;
-      const y = document.getElementById("bYear").value;
+    // Utility: parse a single-line date like "December 08, 2007" or "December 8, 2007"
+    function tryParseSingleLineDate(str) {
+      if (!str) return null;
+      // Trim and normalize multiple spaces
+      const s = str.trim().replace(/\s+/g, ' ');
+      // Use Date.parse for natural language month names (works in modern browsers)
+      const parsed = Date.parse(s);
+      if (!isNaN(parsed)) return new Date(parsed);
 
-      if (!m || !d || !y) {
-        alert("Please complete all fields.");
+      // fallback: try MMMM D, YYYY variations with regex
+      const m = s.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+      if (m) {
+        const normalized = `${m[1]} ${parseInt(m[2],10)}, ${m[3]}`;
+        const p2 = Date.parse(normalized);
+        if (!isNaN(p2)) return new Date(p2);
+      }
+      return null;
+    }
+
+    // Page navigation functions
+    const inputPage = document.getElementById('birthdayInputPage');
+    const carouselPage = document.getElementById('carouselPage');
+    const messagePage = document.getElementById('messagePage');
+    const singleDateInput = document.getElementById('singleDate');
+    const hintText = document.getElementById('hintText');
+
+    function validateAndProceed(){
+      const text = singleDateInput.value.trim();
+      const dateObj = tryParseSingleLineDate(text);
+
+      if (!text) {
+        hintText.textContent = 'Please enter the birthday in the format: December 08, 2007';
+        hintText.style.color = '#b23';
+        return;
+      }
+      if (!dateObj) {
+        hintText.textContent = 'Invalid format. Please use e.g. December 08, 2007';
+        hintText.style.color = '#b23';
         return;
       }
 
-      document.getElementById("birthdayInputPage").style.display = "none";
-      document.getElementById("carouselPage").style.display = "block";
-      window.scrollTo(0, 0);
+      // Optionally check if day/month/year match reasonable ranges (already handled by Date)
+      // Save (example) - could be used to show later if desired
+      window._birthday = dateObj;
+
+      // proceed to carousel
+      inputPage.style.display = 'none';
+      carouselPage.style.display = 'flex';
+      carouselPage.setAttribute('aria-hidden','false');
+      window.scrollTo({top:0, behavior:'smooth'});
     }
 
-    function showMessage() {
-      document.getElementById("carouselPage").style.display = "none";
-      document.getElementById("messagePage").style.display = "block";
-      window.scrollTo(0, 0);
+    function backToInput(){
+      carouselPage.style.display = 'none';
+      inputPage.style.display = 'flex';
+      inputPage.setAttribute('aria-hidden','false');
+      window.scrollTo({top:0, behavior:'smooth'});
     }
+
+    function goToMessage(){
+      carouselPage.style.display = 'none';
+      messagePage.style.display = 'flex';
+      messagePage.setAttribute('aria-hidden','false');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function backToCarousel(){
+      messagePage.style.display = 'none';
+      carouselPage.style.display = 'flex';
+      carouselPage.setAttribute('aria-hidden','false');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    // Particle system: subtle soft pastel particles for elegant minimal effect
+    (function(){
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = innerWidth;
+      let h = canvas.height = innerHeight;
+      const particles = [];
+      const COUNT = Math.round((w*h) / 90000); // density scales with screen size (~10-40)
+      const colors = ['#ffd6e0','#d9f0ff','#e8f7ee','#fff3d9','#f5e8ff'];
+
+      function rand(min,max){ return Math.random()*(max-min)+min; }
+
+      function Particle(){
+        this.reset();
+      }
+      Particle.prototype.reset = function(){
+        this.x = rand(0,w);
+        this.y = rand(0,h);
+        this.vx = rand(-0.15,0.15);
+        this.vy = rand(-0.2,0.2);
+        this.size = rand(20,70);
+        this.alpha = rand(0.06,0.22);
+        this.color = colors[Math.floor(rand(0,colors.length))];
+        this.life = rand(200,800);
+        this.age = 0;
+      };
+      Particle.prototype.update = function(){
+        this.x += this.vx;
+        this.y += this.vy;
+        this.age++;
+        if (this.age > this.life || this.x < -200 || this.x > w+200 || this.y < -200 || this.y > h+200){
+          this.reset();
+          // respawn near center for a soft glow flow
+          if(Math.random()>0.5){
+            this.x = rand(w*0.2, w*0.8);
+            this.y = rand(h*0.2, h*0.8);
+          }
+        }
+      };
+      Particle.prototype.draw = function(ctx){
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.alpha;
+        ctx.ellipse(this.x, this.y, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      };
+
+      function init(){
+        w = canvas.width = innerWidth;
+        h = canvas.height = innerHeight;
+        particles.length = 0;
+        const c = Math.max(8, COUNT);
+        for (let i=0;i<c;i++) particles.push(new Particle());
+      }
+
+      function loop(){
+        ctx.clearRect(0,0,w,h);
+        // gentle gradient overlay to unify color
+        const g = ctx.createLinearGradient(0,0,w,h);
+        g.addColorStop(0, 'rgba(255,255,255,0.0)');
+        g.addColorStop(1, 'rgba(255,255,255,0.0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,w,h);
+
+        for (let p of particles){
+          p.update();
+          p.draw(ctx);
+        }
+        requestAnimationFrame(loop);
+      }
+
+      window.addEventListener('resize', () => {
+        init();
+      });
+
+      init();
+      loop();
+    })();
+
+    // Small enhancement: allow Enter key to submit date
+    singleDateInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        validateAndProceed();
+      }
+    });
+
+    // accessibility improvement: focus input on load
+    window.addEventListener('load', () => {
+      singleDateInput.focus();
+    });
   </script>
-
 </body>
 </html>

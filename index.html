@@ -251,74 +251,6 @@
     font-size:0.9rem;
   }
 
-  /* Music Permission Overlay */
-  #musicPermissionOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px);
-  }
-  
-  .music-permission-card {
-    background: white;
-    padding: 40px;
-    border-radius: 24px;
-    text-align: center;
-    max-width: 500px;
-    margin: 20px;
-    box-shadow: 0 20px 60px rgba(255, 107, 129, 0.3);
-    border: 2px solid #ff6b81;
-    animation: fadeIn 0.5s ease;
-  }
-  
-  .music-permission-card h2 {
-    color: #ff6b81;
-    margin-bottom: 20px;
-    font-size: 2.2rem;
-  }
-  
-  .music-permission-card p {
-    color: #666;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-  
-  .enable-music-btn {
-    padding: 16px 40px;
-    background: linear-gradient(90deg, #ff6b81, #ff8fa3);
-    border: none;
-    border-radius: 50px;
-    color: white;
-    font-weight: 600;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(255, 107, 129, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 0 auto;
-  }
-  
-  .enable-music-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 30px rgba(255, 107, 129, 0.5);
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
   /* Music controls */
   .music-controls {
     position: fixed;
@@ -465,12 +397,6 @@
       padding: 6px 12px;
       font-size: 12px;
     }
-    .music-permission-card {
-      padding: 30px 20px;
-    }
-    .music-permission-card h2 {
-      font-size: 1.8rem;
-    }
   }
 </style>
 </head>
@@ -484,1169 +410,13 @@
 
 <canvas id="particleCanvas"></canvas>
 
-<!-- Music Permission Overlay -->
-<div id="musicPermissionOverlay">
-  <div class="music-permission-card">
-    <h2>🎵 Enable Birthday Music 🎵</h2>
-    <p>To make your birthday celebration complete, please enable the "Happy Birthday" music! The music will play automatically when you enter your birthday.</p>
-    <button class="enable-music-btn" onclick="enableMusicPermission()">
-      <i class="fas fa-music"></i> Enable Music
-    </button>
-    <p style="margin-top:15px; font-size:0.9rem; color:#999;">You can adjust volume or mute later</p>
-  </div>
-</div>
-
 <!-- Music Indicator -->
 <div class="music-indicator" id="musicIndicator">
   <span class="note">🎵</span> Happy Birthday Music!
 </div>
 
 <!-- Birthday Input Page -->
-<section id="birthdayInputPage" class="page" style="display:none;">
-  <div class="birthday-card">
-    <div class="floating-hearts" id="floatingHearts"></div>
-    
-    <h1 class="main-title">HAPPY BIRTHDAY Mylove!</h1>
-    <div class="subtitle">Hello a visit, and blow the credit. (see your vision).</div>
-    
-    <div class="heart-container">
-      <div class="heart-glow"></div>
-      <div class="heart-shape"></div>
-    </div>
-    
-    <div class="input-section">
-      <h3><i class="fas fa-birthday-cake"></i> Enter Your Birthday</h3>
-      <input type="text" id="singleDate" class="birthday-input" placeholder="Enter your Birthday here Birthday Girl">
-      <div style="margin-top:20px;">
-        <button class="btn-primary-custom" onclick="validateAndProceed()">
-          <i class="fas fa-gift"></i> Continue to Surprise
-        </button>
-      </div>
-      <div class="hint" id="hintText">Enter your birthday to unlock the special celebration!</div>
-    </div>
-    
-    <div class="message-box">
-      <p><i class="fas fa-heart" style="color:#ff6b81; margin-right:8px;"></i> <strong>More! Lilianya pedant.</strong> Microphone is active. How to extrapolate!</p>
-    </div>
-  </div>
-</section>
-
-<!-- Carousel Page -->
-<section id="carouselPage" class="page">
-  <div class="top-controls" onclick="backToInput()">
-    <i class="fas fa-arrow-left"></i> Back
-  </div>
-  <div id="birthdayCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
-    <div class="carousel-inner">
-      <div class="carousel-item active"><img src="PICTURES/pic1.jpeg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic2.jpg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic3.jpeg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic4.jpeg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic5.jpg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic6.jpg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic7.jpg" class="d-block" alt=""></div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-  <div class="carousel-continue">
-    <button class="btn-primary-custom" onclick="goToMessage()">
-      <i class="fas fa-envelope"></i> Read Special Message
-    </button>
-  </div>
-</section>
-
-<!-- Message Page -->
-<section id="messagePage" class="page">
-  <div class="message-back" onclick="backToCarousel()">
-    <i class="fas fa-arrow-left"></i> Back
-  </div>
-  <div class="final-message">
-    <h2>For You</h2>
-
-    <p>Hi! Irish Kha, <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HAPPY BIRTHDAY Mylove!</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-<style>
-  :root { --accent:#ff6b81; }
-
-  html,body{
-    margin:0; padding:0; height:100%;
-    font-family:'Poppins', sans-serif;
-    overflow-x:hidden;
-    background: linear-gradient(160deg, #f6eeff 0%, #eff9ff 100%);
-  }
-
-  .glow-layers{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
-  .glow{position:absolute; filter:blur(90px); opacity:0.55; mix-blend-mode:screen;}
-  .g1{width:35vmax; height:35vmax; background:radial-gradient(circle at 30% 30%, #ffd6e0, transparent 30%); top:-10vh; left:-10vw;}
-  .g2{width:40vmax; height:40vmax; background:radial-gradient(circle at 70% 70%, #d9f0ff, transparent 30%); bottom:-15vh; right:-5vw;}
-  .g3{width:25vmax; height:25vmax; background:radial-gradient(circle at 50% 50%, #e8f7ee, transparent 30%); top:20vh; right:5vw; opacity:0.5;}
-
-  #particleCanvas{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.9;}
-  .page { min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; z-index:2; padding:20px; flex-direction:column;}
-
-  /* Main Birthday Card */
-  .birthday-card{
-    max-width:800px; width:100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
-    backdrop-filter: blur(12px) saturate(1.1);
-    border-radius:24px; padding:40px 30px;
-    text-align:center; border:2px solid rgba(255,255,255,0.2);
-    box-shadow: 0 20px 50px rgba(20,20,40,0.15), inset 0 1px 0 rgba(255,255,255,0.3);
-    position:relative;
-    overflow:hidden;
-  }
-  
-  .birthday-card::before{
-    content:'';
-    position:absolute;
-    top:0; left:0; right:0; height:4px;
-    background: linear-gradient(90deg, #ff6b81, #ffb3b3, #ffd6e0, #ffb3b3, #ff6b81);
-    border-radius:24px 24px 0 0;
-  }
-
-  /* Title Styling */
-  .main-title{
-    font-size:3.5rem;
-    font-weight:800;
-    background: linear-gradient(90deg, #ff6b81, #ff8fa3, #ff6b81);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color:transparent;
-    margin-bottom:10px;
-    text-shadow: 0 2px 10px rgba(255,107,129,0.2);
-    letter-spacing:1px;
-  }
-  
-  .subtitle{
-    font-size:1.8rem;
-    color:#666;
-    margin-bottom:30px;
-    font-weight:300;
-  }
-
-  /* Heart Container */
-  .heart-container{
-    position:relative;
-    width:200px;
-    height:180px;
-    margin:30px auto;
-    animation: heartbeat 1.2s infinite ease-in-out;
-  }
-  
-  .heart-shape{
-    position:absolute;
-    top:0; left:50%;
-    transform:translateX(-50%);
-    width:100px;
-    height:90px;
-    background:linear-gradient(135deg, #ff6b81, #ff8fa3);
-  }
-  
-  .heart-shape::before,
-  .heart-shape::after{
-    content:'';
-    position:absolute;
-    width:100px;
-    height:90px;
-    background:linear-gradient(135deg, #ff6b81, #ff8fa3);
-    border-radius:50px 50px 0 0;
-  }
-  
-  .heart-shape::before{
-    top:-45px;
-    left:0;
-    transform:rotate(-45deg);
-    transform-origin:0 100%;
-  }
-  
-  .heart-shape::after{
-    top:-45px;
-    left:45px;
-    transform:rotate(45deg);
-    transform-origin:100% 100%;
-  }
-  
-  .heart-glow{
-    position:absolute;
-    top:50%; left:50%;
-    transform:translate(-50%, -50%);
-    width:140px;
-    height:140px;
-    background:radial-gradient(circle, rgba(255,107,129,0.4) 0%, transparent 70%);
-    border-radius:50%;
-    z-index:-1;
-    animation: pulseGlow 2s infinite;
-  }
-  
-  @keyframes heartbeat{
-    0%{transform: scale(1);}
-    5%{transform: scale(1.1);}
-    10%{transform: scale(1);}
-    15%{transform: scale(1.15);}
-    50%{transform: scale(1);}
-    100%{transform: scale(1);}
-  }
-  
-  @keyframes pulseGlow{
-    0%{opacity:0.5; transform:translate(-50%, -50%) scale(0.8);}
-    50%{opacity:0.8; transform:translate(-50%, -50%) scale(1.1);}
-    100%{opacity:0.5; transform:translate(-50%, -50%) scale(0.8);}
-  }
-
-  /* Input Section */
-  .input-section{
-    background:rgba(255,255,255,0.9);
-    border-radius:16px;
-    padding:25px;
-    margin:30px auto;
-    max-width:500px;
-    border:1px solid rgba(255,107,129,0.2);
-    box-shadow:0 8px 25px rgba(255,107,129,0.1);
-  }
-  
-  .input-section h3{
-    color:#ff6b81;
-    margin-bottom:15px;
-    font-size:1.5rem;
-  }
-  
-  .birthday-input{
-    width:100%;
-    padding:14px 20px;
-    font-size:1.1rem;
-    border-radius:12px;
-    border:2px solid #ffd6e0;
-    outline:none;
-    background:white;
-    text-align:center;
-    transition:all 0.3s ease;
-  }
-  
-  .birthday-input:focus{
-    border-color:#ff6b81;
-    box-shadow:0 0 0 3px rgba(255,107,129,0.2);
-  }
-  
-  .btn-primary-custom{
-    padding:14px 35px;
-    background:linear-gradient(90deg,#ff6b81,#ff8fa3);
-    border:none;
-    border-radius:999px;
-    color:white;
-    font-weight:600;
-    font-size:1.1rem;
-    cursor:pointer;
-    transition:all 0.3s ease;
-    margin-top:20px;
-    box-shadow:0 6px 20px rgba(255,107,129,0.3);
-  }
-  
-  .btn-primary-custom:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 25px rgba(255,107,129,0.4);
-    background:linear-gradient(90deg,#ff5a72,#ff7b94);
-  }
-
-  /* Floating Elements */
-  .floating-hearts{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    z-index:1;
-    overflow:hidden;
-  }
-  
-  .floating-heart{
-    position:absolute;
-    width:20px;
-    height:20px;
-    background:#ff6b81;
-    transform:rotate(45deg);
-    opacity:0;
-  }
-  
-  .floating-heart::before,
-  .floating-heart::after{
-    content:'';
-    position:absolute;
-    width:20px;
-    height:20px;
-    background:#ff6b81;
-    border-radius:50%;
-  }
-  
-  .floating-heart::before{
-    top:-10px;
-    left:0;
-  }
-  
-  .floating-heart::after{
-    top:0;
-    left:-10px;
-  }
-
-  /* Message Box */
-  .message-box{
-    background:rgba(255,255,255,0.8);
-    border-left:4px solid #ff6b81;
-    padding:20px;
-    border-radius:12px;
-    margin-top:25px;
-    text-align:left;
-    font-style:italic;
-    color:#555;
-  }
-  
-  .message-box p{
-    margin:0;
-    line-height:1.6;
-  }
-
-  .hint{
-    color:#888;
-    margin-top:15px;
-    font-size:0.9rem;
-  }
-
-  /* Music Permission Overlay */
-  #musicPermissionOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px);
-  }
-  
-  .music-permission-card {
-    background: white;
-    padding: 40px;
-    border-radius: 24px;
-    text-align: center;
-    max-width: 500px;
-    margin: 20px;
-    box-shadow: 0 20px 60px rgba(255, 107, 129, 0.3);
-    border: 2px solid #ff6b81;
-    animation: fadeIn 0.5s ease;
-  }
-  
-  .music-permission-card h2 {
-    color: #ff6b81;
-    margin-bottom: 20px;
-    font-size: 2.2rem;
-  }
-  
-  .music-permission-card p {
-    color: #666;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-  
-  .enable-music-btn {
-    padding: 16px 40px;
-    background: linear-gradient(90deg, #ff6b81, #ff8fa3);
-    border: none;
-    border-radius: 50px;
-    color: white;
-    font-weight: 600;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(255, 107, 129, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 0 auto;
-  }
-  
-  .enable-music-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 30px rgba(255, 107, 129, 0.5);
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Music controls */
-  .music-controls {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1001;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  
-  .music-btn {
-    background: rgba(255, 107, 129, 0.9);
-    color: white;
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(255, 107, 129, 0.3);
-    transition: all 0.3s ease;
-  }
-  
-  .music-btn:hover {
-    transform: scale(1.1);
-    background: rgba(255, 107, 129, 1);
-  }
-  
-  .music-btn.muted {
-    background: rgba(100, 100, 100, 0.7);
-  }
-  
-  .volume-slider {
-    width: 100px;
-    height: 5px;
-    -webkit-appearance: none;
-    background: rgba(255, 107, 129, 0.3);
-    border-radius: 5px;
-    outline: none;
-  }
-  
-  .volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #ff6b81;
-    cursor: pointer;
-  }
-  
-  .music-indicator {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ff6b81;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
-    display: none;
-    align-items: center;
-    gap: 8px;
-    animation: pulse 2s infinite;
-  }
-  
-  .music-indicator .note {
-    font-size: 18px;
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-
-  /* Carousel page */
-  #carouselPage{display:none; flex-direction:column; align-items:center;}
-  .carousel-item img {height:100vh; width:100%; object-fit:cover;}
-  .top-controls{position:fixed; top:12px; left:12px; z-index:10; background:rgba(255,255,255,0.9); padding:8px 12px; border-radius:12px; cursor:pointer; font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.1);}
-  .carousel-continue{margin:20px auto;}
-
-  /* Message page - FIXED SCROLLABLE */
-  #messagePage{
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-    padding:20px 15px;
-    height:100vh;
-    overflow-y:auto;
-  }
-  .message-back{position:fixed; top:12px; left:12px; z-index:10; background:rgba(255,255,255,0.95); padding:8px 12px; border-radius:12px; cursor:pointer; font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.1);}
-  .final-message{
-    max-width:900px;
-    width:100%;
-    background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.90));
-    border-radius:18px; padding:28px;
-    border:1px solid rgba(0,0,0,0.04);
-    box-shadow:0 12px 40px rgba(20,20,40,0.06);
-    line-height:1.55;
-  }
-  .final-message h2{text-align:center; color:var(--accent); margin-bottom:12px;}
-  .final-message p{
-    white-space:pre-wrap; margin-bottom:14px;
-    opacity:0; transform: translateY(20px); transition: all 0.8s ease-out;
-  }
-  .final-message p.visible{
-    opacity:1; transform: translateY(0);
-  }
-  
-  @media(max-width:768px){
-    .main-title{font-size:2.5rem;}
-    .subtitle{font-size:1.4rem;}
-    .birthday-card{padding:30px 20px;}
-    .heart-container{width:150px; height:135px;}
-    .heart-shape{width:75px; height:67.5px;}
-    .heart-shape::before,
-    .heart-shape::after{width:75px; height:67.5px;}
-    .top-controls, .message-back{padding:6px 10px;}
-    .btn-primary-custom{padding:12px 25px;}
-    .final-message{padding:18px;}
-    .music-controls {
-      bottom: 10px;
-      left: 10px;
-    }
-    .music-btn {
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
-    }
-    .volume-slider {
-      width: 80px;
-    }
-    .music-indicator {
-      top: 10px;
-      right: 10px;
-      padding: 6px 12px;
-      font-size: 12px;
-    }
-    .music-permission-card {
-      padding: 30px 20px;
-    }
-    .music-permission-card h2 {
-      font-size: 1.8rem;
-    }
-  }
-</style>
-</head>
-<body>
-
-<div class="glow-layers">
-  <div class="glow g1"></div>
-  <div class="glow g2"></div>
-  <div class="glow g3"></div>
-</div>
-
-<canvas id="particleCanvas"></canvas>
-
-<!-- Music Permission Overlay -->
-<div id="musicPermissionOverlay">
-  <div class="music-permission-card">
-    <h2>🎵 Enable Birthday Music 🎵</h2>
-    <p>To make your birthday celebration complete, please enable the "Happy Birthday" music! The music will play automatically when you enter your birthday.</p>
-    <button class="enable-music-btn" onclick="enableMusicPermission()">
-      <i class="fas fa-music"></i> Enable Music
-    </button>
-    <p style="margin-top:15px; font-size:0.9rem; color:#999;">You can adjust volume or mute later</p>
-  </div>
-</div>
-
-<!-- Music Indicator -->
-<div class="music-indicator" id="musicIndicator">
-  <span class="note">🎵</span> Happy Birthday Music!
-</div>
-
-<!-- Birthday Input Page -->
-<section id="birthdayInputPage" class="page" style="display:none;">
-  <div class="birthday-card">
-    <div class="floating-hearts" id="floatingHearts"></div>
-    
-    <h1 class="main-title">HAPPY BIRTHDAY Mylove!</h1>
-    <div class="subtitle">Hello a visit, and blow the credit. (see your vision).</div>
-    
-    <div class="heart-container">
-      <div class="heart-glow"></div>
-      <div class="heart-shape"></div>
-    </div>
-    
-    <div class="input-section">
-      <h3><i class="fas fa-birthday-cake"></i> Enter Your Birthday</h3>
-      <input type="text" id="singleDate" class="birthday-input" placeholder="December 08, 2007 or 12/08/2007">
-      <div style="margin-top:20px;">
-        <button class="btn-primary-custom" onclick="validateAndProceed()">
-          <i class="fas fa-gift"></i> Continue to Surprise
-        </button>
-      </div>
-      <div class="hint" id="hintText">Enter your birthday to unlock the special celebration!</div>
-    </div>
-    
-    <div class="message-box">
-      <p><i class="fas fa-heart" style="color:#ff6b81; margin-right:8px;"></i> <strong>More! Lilianya pedant.</strong> Microphone is active. How to extrapolate!</p>
-    </div>
-  </div>
-</section>
-
-<!-- Carousel Page -->
-<section id="carouselPage" class="page">
-  <div class="top-controls" onclick="backToInput()">
-    <i class="fas fa-arrow-left"></i> Back
-  </div>
-  <div id="birthdayCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
-    <div class="carousel-inner">
-      <div class="carousel-item active"><img src="PICTURES/pic1.jpeg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic2.jpg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic3.jpeg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic4.jpeg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic5.jpg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic6.jpg" class="d-block" alt=""></div>
-      <div class="carousel-item"><img src="PICTURES/pic7.jpg" class="d-block" alt=""></div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#birthdayCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-  <div class="carousel-continue">
-    <button class="btn-primary-custom" onclick="goToMessage()">
-      <i class="fas fa-envelope"></i> Read Special Message
-    </button>
-  </div>
-</section>
-
-<!-- Message Page -->
-<section id="messagePage" class="page">
-  <div class="message-back" onclick="backToCarousel()">
-    <i class="fas fa-arrow-left"></i> Back
-  </div>
-  <div class="final-message">
-    <h2>For You</h2>
-
-    <p>Hi! Irish Kha,<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HAPPY BIRTHDAY Mylove!</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-<style>
-  :root { --accent:#ff6b81; }
-
-  html,body{
-    margin:0; padding:0; height:100%;
-    font-family:'Poppins', sans-serif;
-    overflow-x:hidden;
-    background: linear-gradient(160deg, #f6eeff 0%, #eff9ff 100%);
-  }
-
-  .glow-layers{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
-  .glow{position:absolute; filter:blur(90px); opacity:0.55; mix-blend-mode:screen;}
-  .g1{width:35vmax; height:35vmax; background:radial-gradient(circle at 30% 30%, #ffd6e0, transparent 30%); top:-10vh; left:-10vw;}
-  .g2{width:40vmax; height:40vmax; background:radial-gradient(circle at 70% 70%, #d9f0ff, transparent 30%); bottom:-15vh; right:-5vw;}
-  .g3{width:25vmax; height:25vmax; background:radial-gradient(circle at 50% 50%, #e8f7ee, transparent 30%); top:20vh; right:5vw; opacity:0.5;}
-
-  #particleCanvas{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.9;}
-  .page { min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; z-index:2; padding:20px; flex-direction:column;}
-
-  /* Main Birthday Card */
-  .birthday-card{
-    max-width:800px; width:100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
-    backdrop-filter: blur(12px) saturate(1.1);
-    border-radius:24px; padding:40px 30px;
-    text-align:center; border:2px solid rgba(255,255,255,0.2);
-    box-shadow: 0 20px 50px rgba(20,20,40,0.15), inset 0 1px 0 rgba(255,255,255,0.3);
-    position:relative;
-    overflow:hidden;
-  }
-  
-  .birthday-card::before{
-    content:'';
-    position:absolute;
-    top:0; left:0; right:0; height:4px;
-    background: linear-gradient(90deg, #ff6b81, #ffb3b3, #ffd6e0, #ffb3b3, #ff6b81);
-    border-radius:24px 24px 0 0;
-  }
-
-  /* Title Styling */
-  .main-title{
-    font-size:3.5rem;
-    font-weight:800;
-    background: linear-gradient(90deg, #ff6b81, #ff8fa3, #ff6b81);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color:transparent;
-    margin-bottom:10px;
-    text-shadow: 0 2px 10px rgba(255,107,129,0.2);
-    letter-spacing:1px;
-  }
-  
-  .subtitle{
-    font-size:1.8rem;
-    color:#666;
-    margin-bottom:30px;
-    font-weight:300;
-  }
-
-  /* Heart Container */
-  .heart-container{
-    position:relative;
-    width:200px;
-    height:180px;
-    margin:30px auto;
-    animation: heartbeat 1.2s infinite ease-in-out;
-  }
-  
-  .heart-shape{
-    position:absolute;
-    top:0; left:50%;
-    transform:translateX(-50%);
-    width:100px;
-    height:90px;
-    background:linear-gradient(135deg, #ff6b81, #ff8fa3);
-  }
-  
-  .heart-shape::before,
-  .heart-shape::after{
-    content:'';
-    position:absolute;
-    width:100px;
-    height:90px;
-    background:linear-gradient(135deg, #ff6b81, #ff8fa3);
-    border-radius:50px 50px 0 0;
-  }
-  
-  .heart-shape::before{
-    top:-45px;
-    left:0;
-    transform:rotate(-45deg);
-    transform-origin:0 100%;
-  }
-  
-  .heart-shape::after{
-    top:-45px;
-    left:45px;
-    transform:rotate(45deg);
-    transform-origin:100% 100%;
-  }
-  
-  .heart-glow{
-    position:absolute;
-    top:50%; left:50%;
-    transform:translate(-50%, -50%);
-    width:140px;
-    height:140px;
-    background:radial-gradient(circle, rgba(255,107,129,0.4) 0%, transparent 70%);
-    border-radius:50%;
-    z-index:-1;
-    animation: pulseGlow 2s infinite;
-  }
-  
-  @keyframes heartbeat{
-    0%{transform: scale(1);}
-    5%{transform: scale(1.1);}
-    10%{transform: scale(1);}
-    15%{transform: scale(1.15);}
-    50%{transform: scale(1);}
-    100%{transform: scale(1);}
-  }
-  
-  @keyframes pulseGlow{
-    0%{opacity:0.5; transform:translate(-50%, -50%) scale(0.8);}
-    50%{opacity:0.8; transform:translate(-50%, -50%) scale(1.1);}
-    100%{opacity:0.5; transform:translate(-50%, -50%) scale(0.8);}
-  }
-
-  /* Input Section */
-  .input-section{
-    background:rgba(255,255,255,0.9);
-    border-radius:16px;
-    padding:25px;
-    margin:30px auto;
-    max-width:500px;
-    border:1px solid rgba(255,107,129,0.2);
-    box-shadow:0 8px 25px rgba(255,107,129,0.1);
-  }
-  
-  .input-section h3{
-    color:#ff6b81;
-    margin-bottom:15px;
-    font-size:1.5rem;
-  }
-  
-  .birthday-input{
-    width:100%;
-    padding:14px 20px;
-    font-size:1.1rem;
-    border-radius:12px;
-    border:2px solid #ffd6e0;
-    outline:none;
-    background:white;
-    text-align:center;
-    transition:all 0.3s ease;
-  }
-  
-  .birthday-input:focus{
-    border-color:#ff6b81;
-    box-shadow:0 0 0 3px rgba(255,107,129,0.2);
-  }
-  
-  .btn-primary-custom{
-    padding:14px 35px;
-    background:linear-gradient(90deg,#ff6b81,#ff8fa3);
-    border:none;
-    border-radius:999px;
-    color:white;
-    font-weight:600;
-    font-size:1.1rem;
-    cursor:pointer;
-    transition:all 0.3s ease;
-    margin-top:20px;
-    box-shadow:0 6px 20px rgba(255,107,129,0.3);
-  }
-  
-  .btn-primary-custom:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 25px rgba(255,107,129,0.4);
-    background:linear-gradient(90deg,#ff5a72,#ff7b94);
-  }
-
-  /* Floating Elements */
-  .floating-hearts{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    z-index:1;
-    overflow:hidden;
-  }
-  
-  .floating-heart{
-    position:absolute;
-    width:20px;
-    height:20px;
-    background:#ff6b81;
-    transform:rotate(45deg);
-    opacity:0;
-  }
-  
-  .floating-heart::before,
-  .floating-heart::after{
-    content:'';
-    position:absolute;
-    width:20px;
-    height:20px;
-    background:#ff6b81;
-    border-radius:50%;
-  }
-  
-  .floating-heart::before{
-    top:-10px;
-    left:0;
-  }
-  
-  .floating-heart::after{
-    top:0;
-    left:-10px;
-  }
-
-  /* Message Box */
-  .message-box{
-    background:rgba(255,255,255,0.8);
-    border-left:4px solid #ff6b81;
-    padding:20px;
-    border-radius:12px;
-    margin-top:25px;
-    text-align:left;
-    font-style:italic;
-    color:#555;
-  }
-  
-  .message-box p{
-    margin:0;
-    line-height:1.6;
-  }
-
-  .hint{
-    color:#888;
-    margin-top:15px;
-    font-size:0.9rem;
-  }
-
-  /* Music Permission Overlay */
-  #musicPermissionOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px);
-  }
-  
-  .music-permission-card {
-    background: white;
-    padding: 40px;
-    border-radius: 24px;
-    text-align: center;
-    max-width: 500px;
-    margin: 20px;
-    box-shadow: 0 20px 60px rgba(255, 107, 129, 0.3);
-    border: 2px solid #ff6b81;
-    animation: fadeIn 0.5s ease;
-  }
-  
-  .music-permission-card h2 {
-    color: #ff6b81;
-    margin-bottom: 20px;
-    font-size: 2.2rem;
-  }
-  
-  .music-permission-card p {
-    color: #666;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-  
-  .enable-music-btn {
-    padding: 16px 40px;
-    background: linear-gradient(90deg, #ff6b81, #ff8fa3);
-    border: none;
-    border-radius: 50px;
-    color: white;
-    font-weight: 600;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(255, 107, 129, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 0 auto;
-  }
-  
-  .enable-music-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 30px rgba(255, 107, 129, 0.5);
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Music controls */
-  .music-controls {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1001;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  
-  .music-btn {
-    background: rgba(255, 107, 129, 0.9);
-    color: white;
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(255, 107, 129, 0.3);
-    transition: all 0.3s ease;
-  }
-  
-  .music-btn:hover {
-    transform: scale(1.1);
-    background: rgba(255, 107, 129, 1);
-  }
-  
-  .music-btn.muted {
-    background: rgba(100, 100, 100, 0.7);
-  }
-  
-  .volume-slider {
-    width: 100px;
-    height: 5px;
-    -webkit-appearance: none;
-    background: rgba(255, 107, 129, 0.3);
-    border-radius: 5px;
-    outline: none;
-  }
-  
-  .volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #ff6b81;
-    cursor: pointer;
-  }
-  
-  .music-indicator {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ff6b81;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
-    display: none;
-    align-items: center;
-    gap: 8px;
-    animation: pulse 2s infinite;
-  }
-  
-  .music-indicator .note {
-    font-size: 18px;
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-
-  /* Carousel page */
-  #carouselPage{display:none; flex-direction:column; align-items:center;}
-  .carousel-item img {height:100vh; width:100%; object-fit:cover;}
-  .top-controls{position:fixed; top:12px; left:12px; z-index:10; background:rgba(255,255,255,0.9); padding:8px 12px; border-radius:12px; cursor:pointer; font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.1);}
-  .carousel-continue{margin:20px auto;}
-
-  /* Message page - FIXED SCROLLABLE */
-  #messagePage{
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
-    padding:20px 15px;
-    height:100vh;
-    overflow-y:auto;
-  }
-  .message-back{position:fixed; top:12px; left:12px; z-index:10; background:rgba(255,255,255,0.95); padding:8px 12px; border-radius:12px; cursor:pointer; font-weight:600; box-shadow:0 6px 18px rgba(0,0,0,0.1);}
-  .final-message{
-    max-width:900px;
-    width:100%;
-    background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.90));
-    border-radius:18px; padding:28px;
-    border:1px solid rgba(0,0,0,0.04);
-    box-shadow:0 12px 40px rgba(20,20,40,0.06);
-    line-height:1.55;
-  }
-  .final-message h2{text-align:center; color:var(--accent); margin-bottom:12px;}
-  .final-message p{
-    white-space:pre-wrap; margin-bottom:14px;
-    opacity:0; transform: translateY(20px); transition: all 0.8s ease-out;
-  }
-  .final-message p.visible{
-    opacity:1; transform: translateY(0);
-  }
-  
-  @media(max-width:768px){
-    .main-title{font-size:2.5rem;}
-    .subtitle{font-size:1.4rem;}
-    .birthday-card{padding:30px 20px;}
-    .heart-container{width:150px; height:135px;}
-    .heart-shape{width:75px; height:67.5px;}
-    .heart-shape::before,
-    .heart-shape::after{width:75px; height:67.5px;}
-    .top-controls, .message-back{padding:6px 10px;}
-    .btn-primary-custom{padding:12px 25px;}
-    .final-message{padding:18px;}
-    .music-controls {
-      bottom: 10px;
-      left: 10px;
-    }
-    .music-btn {
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
-    }
-    .volume-slider {
-      width: 80px;
-    }
-    .music-indicator {
-      top: 10px;
-      right: 10px;
-      padding: 6px 12px;
-      font-size: 12px;
-    }
-    .music-permission-card {
-      padding: 30px 20px;
-    }
-    .music-permission-card h2 {
-      font-size: 1.8rem;
-    }
-  }
-</style>
-</head>
-<body>
-
-<div class="glow-layers">
-  <div class="glow g1"></div>
-  <div class="glow g2"></div>
-  <div class="glow g3"></div>
-</div>
-
-<canvas id="particleCanvas"></canvas>
-
-<!-- Music Permission Overlay -->
-<div id="musicPermissionOverlay">
-  <div class="music-permission-card">
-    <h2>🎵 Enable Birthday Music 🎵</h2>
-    <p>To make your birthday celebration complete, please enable the "Happy Birthday" music! The music will play automatically when you enter your birthday.</p>
-    <button class="enable-music-btn" onclick="enableMusicPermission()">
-      <i class="fas fa-music"></i> Enable Music
-    </button>
-    <p style="margin-top:15px; font-size:0.9rem; color:#999;">You can adjust volume or mute later</p>
-  </div>
-</div>
-
-<!-- Music Indicator -->
-<div class="music-indicator" id="musicIndicator">
-  <span class="note">🎵</span> Happy Birthday Music!
-</div>
-
-<!-- Birthday Input Page -->
-<section id="birthdayInputPage" class="page" style="display:none;">
+<section id="birthdayInputPage" class="page">
   <div class="birthday-card">
     <div class="floating-hearts" id="floatingHearts"></div>
     
@@ -1740,14 +510,8 @@
   <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
 </div>
 
-<!-- Audio Element for Birthday Music - FIXED SOURCE -->
-<audio id="birthdayMusic" loop preload="auto">
-  <!-- Reliable Happy Birthday Music Source -->
-  <source src="https://www.bensound.com/bensound-music/bensound-happybirthday.mp3" type="audio/mpeg">
-  <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-443.mp3" type="audio/mpeg">
-  <!-- Fallback local reference -->
-  <source src="happy-birthday.mp3" type="audio/mpeg">
-</audio>
+<!-- Hidden YouTube iframe for music -->
+<iframe id="youtubeMusic" width="0" height="0" src="https://www.youtube.com/embed/MhJrx4UwNNw?enablejsapi=1&autoplay=0&controls=0&showinfo=0&rel=0&loop=1&playlist=MhJrx4UwNNw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="display: none;"></iframe>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -1757,55 +521,62 @@
   const messagePage = document.getElementById('messagePage');
   const singleDateInput = document.getElementById('singleDate');
   const hintText = document.getElementById('hintText');
-  const birthdayMusic = document.getElementById('birthdayMusic');
   const musicControls = document.getElementById('musicControls');
   const musicIndicator = document.getElementById('musicIndicator');
   const playPauseBtn = document.getElementById('playPauseBtn');
   const muteBtn = document.getElementById('muteBtn');
   const volumeSlider = document.getElementById('volumeSlider');
   const floatingHearts = document.getElementById('floatingHearts');
-  const musicPermissionOverlay = document.getElementById('musicPermissionOverlay');
+  const youtubeMusic = document.getElementById('youtubeMusic');
 
   // Music State
   let isMusicPlaying = false;
   let isMuted = false;
-  let lastVolume = 0.5;
-  let musicPermissionGranted = false;
+  let userHasInteracted = false;
+  let youtubePlayer;
 
-  // Initialize music volume
-  birthdayMusic.volume = lastVolume;
-
-  // Show music permission overlay immediately
-  window.addEventListener('load', function() {
-    // Show permission overlay
-    musicPermissionOverlay.style.display = 'flex';
-    
-    // Preload the music
-    birthdayMusic.load();
-    
-    // Create floating hearts
+  // Initialize on page load
+  window.addEventListener('load', () => {
     createFloatingHearts();
+    initParticles();
+    singleDateInput.focus();
+    
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    
+    // Show instruction for music
+    hintText.innerHTML = 'Enter your birthday to unlock the special celebration!<br><small>🎵 Click anywhere first, then enter birthday for music!</small>';
   });
 
-  // Enable Music Permission Function
-  function enableMusicPermission() {
-    musicPermissionGranted = true;
-    musicPermissionOverlay.style.display = 'none';
-    birthdayInputPage.style.display = 'flex';
-    
-    // Try to play a tiny bit of silent audio to get permission (this is a common workaround)
-    const silentAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
-    silentAudio.play().then(() => {
-      silentAudio.pause();
-      console.log('Music permission granted');
-    }).catch(err => {
-      console.log('Could not get audio permission automatically');
+  // YouTube Player API
+  function onYouTubeIframeAPIReady() {
+    youtubePlayer = new YT.Player('youtubeMusic', {
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
     });
-    
-    // Focus on input
-    setTimeout(() => {
-      singleDateInput.focus();
-    }, 300);
+  }
+
+  function onPlayerReady(event) {
+    console.log('YouTube player is ready');
+    // Set initial volume
+    youtubePlayer.setVolume(50);
+  }
+
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+      isMusicPlaying = true;
+      musicIndicator.style.display = 'flex';
+      playPauseBtn.innerHTML = '⏸️';
+    } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+      isMusicPlaying = false;
+      musicIndicator.style.display = 'none';
+      playPauseBtn.innerHTML = '▶️';
+    }
   }
 
   // Create floating hearts
@@ -1814,7 +585,6 @@
       const heart = document.createElement('div');
       heart.className = 'floating-heart';
       
-      // Random properties
       const size = 5 + Math.random() * 15;
       const startX = Math.random() * 100;
       const duration = 3 + Math.random() * 4;
@@ -1828,13 +598,132 @@
       heart.style.opacity = opacity;
       heart.style.animation = `floatUp ${duration}s linear ${delay}s infinite`;
       
-      // Set heart color
       const colors = ['#ff6b81', '#ff8fa3', '#ffb3b3', '#ffd6e0'];
       const color = colors[Math.floor(Math.random() * colors.length)];
       heart.style.background = color;
       
       floatingHearts.appendChild(heart);
     }
+  }
+
+  // Create heart explosion effect
+  function createHeartExplosion() {
+    const explosionContainer = document.getElementById('floatingHearts');
+    for (let i = 0; i < 50; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      
+      const size = 10 + Math.random() * 20;
+      const startX = 50;
+      const startY = 50;
+      const angle = Math.random() * Math.PI * 2;
+      const velocity = 2 + Math.random() * 3;
+      const duration = 1 + Math.random() * 2;
+      const opacity = 0.7 + Math.random() * 0.3;
+      
+      heart.style.width = `${size}px`;
+      heart.style.height = `${size}px`;
+      heart.style.left = `${startX}%`;
+      heart.style.top = `${startY}%`;
+      heart.style.opacity = opacity;
+      
+      const colors = ['#ff6b81', '#ff8fa3', '#ffb3b3', '#ffd6e0'];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.background = color;
+      
+      explosionContainer.appendChild(heart);
+      
+      // Animate explosion
+      const vx = Math.cos(angle) * velocity;
+      const vy = Math.sin(angle) * velocity;
+      
+      let posX = 50;
+      let posY = 50;
+      let time = 0;
+      
+      function animateHeart() {
+        time += 0.016; // 60fps
+        posX += vx;
+        posY += vy;
+        
+        heart.style.left = `${posX}%`;
+        heart.style.top = `${posY}%`;
+        heart.style.opacity = opacity * (1 - time / duration);
+        
+        if (time < duration) {
+          requestAnimationFrame(animateHeart);
+        } else {
+          heart.remove();
+        }
+      }
+      
+      requestAnimationFrame(animateHeart);
+    }
+  }
+
+  // Initialize particles
+  function initParticles() {
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const particles = [];
+    const particleCount = 50;
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+        this.color = Math.random() > 0.5 ? 'rgba(255, 107, 129, 0.3)' : 'rgba(255, 182, 193, 0.3)';
+      }
+      
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+      }
+      
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    
+    function init() {
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      
+      requestAnimationFrame(animate);
+    }
+    
+    init();
+    animate();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
   }
 
   // Floating hearts animation
@@ -1860,77 +749,79 @@
   `;
   document.head.appendChild(style);
 
-  // Play Birthday Music Function
+  // Play Birthday Music
   function playBirthdayMusic() {
-    if (!musicPermissionGranted) {
-      // Show permission overlay again
-      musicPermissionOverlay.style.display = 'flex';
-      return;
+    if (!userHasInteracted) {
+      hintText.innerHTML = 'Please click anywhere on the page first, then enter birthday again!<br><small>🎵 This allows the birthday music to play!</small>';
+      hintText.style.color = '#ff6b81';
+      return false;
     }
     
-    if (isMusicPlaying) return;
+    if (!youtubePlayer) {
+      hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉<br><small>🎵 Music player is loading... click the play button below if needed.</small>';
+      hintText.style.color = '#ff6b81';
+      musicControls.style.display = 'flex';
+      return false;
+    }
     
-    birthdayMusic.play()
-      .then(() => {
-        isMusicPlaying = true;
-        musicControls.style.display = 'flex';
-        musicIndicator.style.display = 'flex';
-        playPauseBtn.innerHTML = '⏸️';
-        birthdayMusic.volume = lastVolume;
-        volumeSlider.value = lastVolume * 100;
-        
-        console.log('Birthday music started successfully!');
-      })
-      .catch(error => {
-        console.error('Music playback failed:', error);
-        
-        // Show error message
-        if (hintText) {
-          hintText.innerHTML = '⚠️ Could not play music. Click the page first, then try again.';
-          hintText.style.color = '#ff6b81';
-        }
-        
-        // Try to get permission by having user click
-        document.addEventListener('click', function retryMusic() {
-          document.removeEventListener('click', retryMusic);
-          playBirthdayMusic();
-        }, { once: true });
-      });
+    try {
+      // Show music controls and indicator
+      musicControls.style.display = 'flex';
+      musicIndicator.style.display = 'flex';
+      
+      // Play the YouTube video
+      youtubePlayer.playVideo();
+      isMusicPlaying = true;
+      playPauseBtn.innerHTML = '⏸️';
+      
+      hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉<br><small>🎵 "Happy Birthday" music is playing!</small>';
+      hintText.style.color = '#ff6b81';
+      
+      return true;
+    } catch (error) {
+      console.error('Error playing music:', error);
+      hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉<br><small>🎵 Click the play button below for music!</small>';
+      hintText.style.color = '#ff6b81';
+      musicControls.style.display = 'flex';
+      return false;
+    }
   }
 
   // Music Control Functions
   function togglePlayPause() {
-    if (!isMusicPlaying) {
-      playBirthdayMusic();
+    if (!youtubePlayer) return;
+    
+    if (isMusicPlaying) {
+      youtubePlayer.pauseVideo();
+      playPauseBtn.innerHTML = '▶️';
+      isMusicPlaying = false;
+      musicIndicator.style.display = 'none';
     } else {
-      if (birthdayMusic.paused) {
-        birthdayMusic.play();
-        playPauseBtn.innerHTML = '⏸️';
-      } else {
-        birthdayMusic.pause();
-        playPauseBtn.innerHTML = '▶️';
-      }
+      youtubePlayer.playVideo();
+      playPauseBtn.innerHTML = '⏸️';
+      isMusicPlaying = true;
+      musicIndicator.style.display = 'flex';
     }
   }
 
   function toggleMute() {
+    if (!youtubePlayer) return;
+    
     isMuted = !isMuted;
     if (isMuted) {
-      birthdayMusic.volume = 0;
+      youtubePlayer.mute();
       muteBtn.innerHTML = '🔇';
       muteBtn.classList.add('muted');
     } else {
-      birthdayMusic.volume = lastVolume;
+      youtubePlayer.unMute();
       muteBtn.innerHTML = '🔊';
       muteBtn.classList.remove('muted');
     }
   }
 
   function updateVolume() {
-    lastVolume = volumeSlider.value / 100;
-    if (!isMuted) {
-      birthdayMusic.volume = lastVolume;
-    }
+    if (!youtubePlayer) return;
+    youtubePlayer.setVolume(volumeSlider.value);
   }
 
   // Set up music controls
@@ -1938,19 +829,28 @@
   muteBtn.addEventListener('click', toggleMute);
   volumeSlider.addEventListener('input', updateVolume);
 
-  // Improved Date Validation (Accepts multiple formats)
+  // Enable user interaction for audio
+  document.addEventListener('click', () => {
+    if (!userHasInteracted) {
+      userHasInteracted = true;
+      hintText.innerHTML = '✅ Ready! Now enter your birthday.<br><small>🎵 Music will play when you enter correct birthday!</small>';
+      hintText.style.color = '#666';
+    }
+  });
+
+  // Date Validation Function
   function parseBirthdayDate(input) {
     if (!input) return null;
     
     const cleaned = input.trim().toLowerCase();
     
-    // Try different date formats
+    // Try different date formats for December 8, 2007
     const formats = [
-      // December 08, 2007
+      // December 08, 2007 or December 8, 2007
       /^(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2}),?\s+(\d{4})$/i,
-      // 12/08/2007 or 12-08-2007
+      // 12/08/2007 or 12-08-2007 or 12/8/2007
       /^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/,
-      // Dec 08, 2007
+      // Dec 08, 2007 or Dec 8, 2007
       /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s+(\d{1,2}),?\s+(\d{4})$/i,
       // 2007-12-08
       /^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/
@@ -1970,7 +870,8 @@
         
         if (format === formats[0] || format === formats[2]) {
           // Month name format
-          month = monthNames[match[1].toLowerCase()];
+          const monthName = match[1].toLowerCase();
+          month = monthNames[monthName];
           day = parseInt(match[2]);
           year = parseInt(match[3]);
         } else if (format === formats[1]) {
@@ -2025,8 +926,6 @@
     }
     
     // Check if date is December 8, 2007
-    const correctDate = new Date(2007, 11, 8); // December is month 11 (0-indexed)
-    
     if (dateObj.getFullYear() !== 2007 || 
         dateObj.getMonth() !== 11 || 
         dateObj.getDate() !== 8) {
@@ -2036,11 +935,13 @@
     }
     
     // SUCCESS! Correct birthday entered
-    hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉';
-    hintText.style.color = '#ff6b81';
+    const musicStarted = playBirthdayMusic();
     
-    // Play birthday music
-    playBirthdayMusic();
+    if (!musicStarted && userHasInteracted) {
+      hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉<br><small>🎵 Click the play button below for music!</small>';
+      hintText.style.color = '#ff6b81';
+      musicControls.style.display = 'flex';
+    }
     
     // Create heart explosion effect
     createHeartExplosion();
@@ -2049,1025 +950,49 @@
     setTimeout(() => {
       birthdayInputPage.style.display = 'none';
       carouselPage.style.display = 'flex';
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    }, 2000);
-  }
-
-  // Heart Explosion Effect
-  function createHeartExplosion() {
-    for (let i = 0; i < 30; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'floating-heart';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       
-      const size = 10 + Math.random() * 20;
-      const startX = 50 + (Math.random() - 0.5) * 40;
-      const startY = 50;
-      const duration = 1 + Math.random() * 2;
-      const delay = Math.random() * 0.5;
-      
-      heart.style.width = `${size}px`;
-      heart.style.height = `${size}px`;
-      heart.style.left = `${startX}%`;
-      heart.style.top = `${startY}%`;
-      heart.style.opacity = '0.8';
-      heart.style.animation = `explodeHeart ${duration}s ease-out ${delay}s forwards`;
-      
-      const colors = ['#ff6b81', '#ff8fa3', '#ffb3b3'];
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      heart.style.background = color;
-      
-      floatingHearts.appendChild(heart);
-      
-      // Remove after animation
-      setTimeout(() => {
-        if (heart.parentNode) {
-          heart.remove();
-        }
-      }, (duration + delay) * 1000);
-    }
-    
-    // Add explosion animation
-    const explodeStyle = document.createElement('style');
-    explodeStyle.textContent = `
-      @keyframes explodeHeart {
-        0% {
-          transform: translate(0, 0) rotate(45deg) scale(0);
-          opacity: 0;
-        }
-        20% {
-          opacity: 0.8;
-          transform: translate(0, 0) rotate(45deg) scale(1);
-        }
-        100% {
-          transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * -200 - 100}px) rotate(45deg) scale(0);
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.appendChild(explodeStyle);
-  }
-
-  // Navigation Functions
-  function backToInput() { 
-    carouselPage.style.display = 'none'; 
-    birthdayInputPage.style.display = 'flex'; 
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-  
-  function goToMessage() { 
-    carouselPage.style.display = 'none'; 
-    messagePage.style.display = 'flex'; 
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-  
-  function backToCarousel() { 
-    messagePage.style.display = 'none'; 
-    carouselPage.style.display = 'flex'; 
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-  
-  // Enter key support
-  singleDateInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      validateAndProceed();
-    }
-  });
-
-  // Soft particle system
-  (function(){
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let w = canvas.width = innerWidth;
-    let h = canvas.height = innerHeight;
-    const particles = [];
-    const COUNT = Math.round((w*h)/90000);
-    const colors = ['#ffd6e0','#d9f0ff','#e8f7ee','#fff3d9','#f5e8ff'];
-    function rand(min,max){return Math.random()*(max-min)+min;}
-    function Particle(){this.reset();}
-    Particle.prototype.reset=function(){this.x=rand(0,w);this.y=rand(0,h);this.vx=rand(-0.15,0.15);this.vy=rand(-0.2,0.2);this.size=rand(20,70);this.alpha=rand(0.06,0.22);this.color=colors[Math.floor(rand(0,colors.length))];this.life=rand(200,800);this.age=0;};
-    Particle.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;this.age++; if(this.age>this.life||this.x<-200||this.x>w+200||this.y<-200||this.y>h+200)this.reset();};
-    Particle.prototype.draw=function(ctx){ctx.beginPath();ctx.fillStyle=this.color;ctx.globalAlpha=this.alpha;ctx.ellipse(this.x,this.y,this.size,this.size*0.6,0,0,Math.PI*2);ctx.fill(); ctx.globalAlpha=1;};
-    function init(){w=canvas.width=innerWidth; h=canvas.height=innerHeight; particles.length=0; for(let i=0;i<Math.max(8,COUNT);i++)particles.push(new Particle());}
-    function loop(){ctx.clearRect(0,0,w,h); for(let p of particles){p.update(); p.draw(ctx);} requestAnimationFrame(loop);}
-    window.addEventListener('resize',()=>{init();});
-    init(); loop();
-  })();
-
-  // Fade-in paragraphs on scroll
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {threshold:0.2});
-  document.querySelectorAll('.final-message p').forEach(p => observer.observe(p));
-</script>
-
-</body>
-</html>. Can you believe you're turning 18? Hehe, too old, right? I still remember the first time I saw you — it was in Roxas. Something about you immediately caught my attention, and I can't help but smile at how funny and strange it felt.</p>
-
-    <p>I wonder if you even remember that first glance, but it stuck with me. I knew there was something special about you, something I had never felt before. Then the next time I saw you was in school, and you were a little nervous — maybe because of me? Every little moment, every laugh, every awkward pause, and all the small things we shared, I remember them like they happened yesterday.</p>
-
-    <p>Thinking about how time has flown, from that first encounter to now, it amazes me how much we have experienced, how many laughs we've shared, and how much we have grown. Now it's your birthday! I hope this day fills your heart with joy and that you feel loved, not only by me but by everyone who truly cares about you.</p>
-
-    <p>I am so proud of you and everything you have achieved. Remember to always be kind to yourself, take care of your body, your heart, and your mind. Eat on time, pray before you sleep, pray before you drive, and never forget to thank God for the little and big things in life.</p>
-
-    <p>Even though I am not there with you physically or online, know that you are always in my heart, and I think of you more than you could ever imagine. I am sorry for leaving you like that — you did not deserve me — and I hope you can forgive me someday. You are one of the most precious parts of my life, and I hope you always feel the love and care that surrounds you, whether I am there or not.</p>
-
-    <p>Happy 18th birthday, my greatest love! May this day be filled with laughter, joy, and people who make you feel truly special. May your heart always be light, your smile always be real, and your journey ahead be filled with happiness, success, and love.</p>
-
-    <p>I hope you continue to follow your dreams, grow stronger, and embrace life with courage and joy. And remember, no matter where life takes us, a part of my heart will always be grateful that I knew you this closely. Enjoy your special day, Irish Kha, and always remember that you are loved, cherished, and unforgettable.</p>
-
-    <p>Every laugh, every small moment, every memory — they will always be a part of me. Once again, Happy 18th birthday again. No matter how far life takes us, a part of my heart will always be grateful that it once knew you this closely.</p>
-
-  </div>
-</section>
-
-<!-- Music Controls -->
-<div class="music-controls" id="musicControls" style="display: none;">
-  <button class="music-btn" id="playPauseBtn">⏸️</button>
-  <button class="music-btn" id="muteBtn">🔊</button>
-  <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
-</div>
-
-<!-- Audio Element for Birthday Music - FIXED SOURCE -->
-<audio id="birthdayMusic" loop preload="auto">
-  <!-- Reliable Happy Birthday Music Source -->
-  <source src="https://www.bensound.com/bensound-music/bensound-happybirthday.mp3" type="audio/mpeg">
-  <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-443.mp3" type="audio/mpeg">
-  <!-- Fallback local reference -->
-  <source src="happy-birthday.mp3" type="audio/mpeg">
-</audio>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // DOM Elements
-  const birthdayInputPage = document.getElementById('birthdayInputPage');
-  const carouselPage = document.getElementById('carouselPage');
-  const messagePage = document.getElementById('messagePage');
-  const singleDateInput = document.getElementById('singleDate');
-  const hintText = document.getElementById('hintText');
-  const birthdayMusic = document.getElementById('birthdayMusic');
-  const musicControls = document.getElementById('musicControls');
-  const musicIndicator = document.getElementById('musicIndicator');
-  const playPauseBtn = document.getElementById('playPauseBtn');
-  const muteBtn = document.getElementById('muteBtn');
-  const volumeSlider = document.getElementById('volumeSlider');
-  const floatingHearts = document.getElementById('floatingHearts');
-  const musicPermissionOverlay = document.getElementById('musicPermissionOverlay');
-
-  // Music State
-  let isMusicPlaying = false;
-  let isMuted = false;
-  let lastVolume = 0.5;
-  let musicPermissionGranted = false;
-
-  // Initialize music volume
-  birthdayMusic.volume = lastVolume;
-
-  // Show music permission overlay immediately
-  window.addEventListener('load', function() {
-    // Show permission overlay
-    musicPermissionOverlay.style.display = 'flex';
-    
-    // Preload the music
-    birthdayMusic.load();
-    
-    // Create floating hearts
-    createFloatingHearts();
-  });
-
-  // Enable Music Permission Function
-  function enableMusicPermission() {
-    musicPermissionGranted = true;
-    musicPermissionOverlay.style.display = 'none';
-    birthdayInputPage.style.display = 'flex';
-    
-    // Try to play a tiny bit of silent audio to get permission (this is a common workaround)
-    const silentAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
-    silentAudio.play().then(() => {
-      silentAudio.pause();
-      console.log('Music permission granted');
-    }).catch(err => {
-      console.log('Could not get audio permission automatically');
-    });
-    
-    // Focus on input
-    setTimeout(() => {
-      singleDateInput.focus();
-    }, 300);
-  }
-
-  // Create floating hearts
-  function createFloatingHearts() {
-    for (let i = 0; i < 15; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'floating-heart';
-      
-      // Random properties
-      const size = 5 + Math.random() * 15;
-      const startX = Math.random() * 100;
-      const duration = 3 + Math.random() * 4;
-      const delay = Math.random() * 2;
-      const opacity = 0.3 + Math.random() * 0.7;
-      
-      heart.style.width = `${size}px`;
-      heart.style.height = `${size}px`;
-      heart.style.left = `${startX}%`;
-      heart.style.bottom = '-20px';
-      heart.style.opacity = opacity;
-      heart.style.animation = `floatUp ${duration}s linear ${delay}s infinite`;
-      
-      // Set heart color
-      const colors = ['#ff6b81', '#ff8fa3', '#ffb3b3', '#ffd6e0'];
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      heart.style.background = color;
-      
-      floatingHearts.appendChild(heart);
-    }
-  }
-
-  // Floating hearts animation
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(45deg) scale(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-        transform: translateY(0) rotate(45deg) scale(1);
-      }
-      90% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(45deg) scale(0);
-        opacity: 0;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Play Birthday Music Function
-  function playBirthdayMusic() {
-    if (!musicPermissionGranted) {
-      // Show permission overlay again
-      musicPermissionOverlay.style.display = 'flex';
-      return;
-    }
-    
-    if (isMusicPlaying) return;
-    
-    birthdayMusic.play()
-      .then(() => {
-        isMusicPlaying = true;
-        musicControls.style.display = 'flex';
-        musicIndicator.style.display = 'flex';
-        playPauseBtn.innerHTML = '⏸️';
-        birthdayMusic.volume = lastVolume;
-        volumeSlider.value = lastVolume * 100;
-        
-        console.log('Birthday music started successfully!');
-      })
-      .catch(error => {
-        console.error('Music playback failed:', error);
-        
-        // Show error message
-        if (hintText) {
-          hintText.innerHTML = '⚠️ Could not play music. Click the page first, then try again.';
-          hintText.style.color = '#ff6b81';
-        }
-        
-        // Try to get permission by having user click
-        document.addEventListener('click', function retryMusic() {
-          document.removeEventListener('click', retryMusic);
-          playBirthdayMusic();
-        }, { once: true });
+      // Initialize carousel
+      const carousel = new bootstrap.Carousel(document.getElementById('birthdayCarousel'), {
+        interval: 3000, // 3 seconds per slide
+        ride: 'carousel'
       });
-  }
-
-  // Music Control Functions
-  function togglePlayPause() {
-    if (!isMusicPlaying) {
-      playBirthdayMusic();
-    } else {
-      if (birthdayMusic.paused) {
-        birthdayMusic.play();
-        playPauseBtn.innerHTML = '⏸️';
-      } else {
-        birthdayMusic.pause();
-        playPauseBtn.innerHTML = '▶️';
-      }
-    }
-  }
-
-  function toggleMute() {
-    isMuted = !isMuted;
-    if (isMuted) {
-      birthdayMusic.volume = 0;
-      muteBtn.innerHTML = '🔇';
-      muteBtn.classList.add('muted');
-    } else {
-      birthdayMusic.volume = lastVolume;
-      muteBtn.innerHTML = '🔊';
-      muteBtn.classList.remove('muted');
-    }
-  }
-
-  function updateVolume() {
-    lastVolume = volumeSlider.value / 100;
-    if (!isMuted) {
-      birthdayMusic.volume = lastVolume;
-    }
-  }
-
-  // Set up music controls
-  playPauseBtn.addEventListener('click', togglePlayPause);
-  muteBtn.addEventListener('click', toggleMute);
-  volumeSlider.addEventListener('input', updateVolume);
-
-  // Improved Date Validation (Accepts multiple formats)
-  function parseBirthdayDate(input) {
-    if (!input) return null;
-    
-    const cleaned = input.trim().toLowerCase();
-    
-    // Try different date formats
-    const formats = [
-      // December 08, 2007
-      /^(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2}),?\s+(\d{4})$/i,
-      // 12/08/2007 or 12-08-2007
-      /^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/,
-      // Dec 08, 2007
-      /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s+(\d{1,2}),?\s+(\d{4})$/i,
-      // 2007-12-08
-      /^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/
-    ];
-    
-    const monthNames = {
-      'january': 0, 'february': 1, 'march': 2, 'april': 3, 'may': 4, 'june': 5,
-      'july': 6, 'august': 7, 'september': 8, 'october': 9, 'november': 10, 'december': 11,
-      'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'may': 4, 'jun': 5,
-      'jul': 6, 'aug': 7, 'sep': 8, 'oct': 9, 'nov': 10, 'dec': 11
-    };
-    
-    for (const format of formats) {
-      const match = cleaned.match(format);
-      if (match) {
-        let month, day, year;
-        
-        if (format === formats[0] || format === formats[2]) {
-          // Month name format
-          month = monthNames[match[1].toLowerCase()];
-          day = parseInt(match[2]);
-          year = parseInt(match[3]);
-        } else if (format === formats[1]) {
-          // MM/DD/YYYY format
-          month = parseInt(match[1]) - 1;
-          day = parseInt(match[2]);
-          year = parseInt(match[3]);
-        } else if (format === formats[3]) {
-          // YYYY-MM-DD format
-          year = parseInt(match[1]);
-          month = parseInt(match[2]) - 1;
-          day = parseInt(match[3]);
-        }
-        
-        // Validate the date
-        const date = new Date(year, month, day);
-        if (date.getFullYear() === year && 
-            date.getMonth() === month && 
-            date.getDate() === day &&
-            !isNaN(date.getTime())) {
-          return date;
-        }
-      }
-    }
-    
-    // Try native Date.parse as fallback
-    const parsed = Date.parse(input);
-    if (!isNaN(parsed)) {
-      const date = new Date(parsed);
-      return date;
-    }
-    
-    return null;
-  }
-
-  // Main Validation Function
-  function validateAndProceed() {
-    const val = singleDateInput.value.trim();
-    
-    if (!val) {
-      hintText.textContent = 'Please enter your birthday (December 08, 2007 or 12/08/2007)';
-      hintText.style.color = '#ff6b81';
-      return;
-    }
-    
-    const dateObj = parseBirthdayDate(val);
-    
-    if (!dateObj) {
-      hintText.textContent = 'Invalid date format. Use: December 08, 2007 or 12/08/2007';
-      hintText.style.color = '#ff6b81';
-      return;
-    }
-    
-    // Check if date is December 8, 2007
-    const correctDate = new Date(2007, 11, 8); // December is month 11 (0-indexed)
-    
-    if (dateObj.getFullYear() !== 2007 || 
-        dateObj.getMonth() !== 11 || 
-        dateObj.getDate() !== 8) {
-      hintText.textContent = 'That\'s not the correct birthday. Try again!';
-      hintText.style.color = '#ff6b81';
-      return;
-    }
-    
-    // SUCCESS! Correct birthday entered
-    hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉';
-    hintText.style.color = '#ff6b81';
-    
-    // Play birthday music
-    playBirthdayMusic();
-    
-    // Create heart explosion effect
-    createHeartExplosion();
-    
-    // Proceed to next page after delay
-    setTimeout(() => {
-      birthdayInputPage.style.display = 'none';
-      carouselPage.style.display = 'flex';
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    }, 2000);
-  }
-
-  // Heart Explosion Effect
-  function createHeartExplosion() {
-    for (let i = 0; i < 30; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'floating-heart';
-      
-      const size = 10 + Math.random() * 20;
-      const startX = 50 + (Math.random() - 0.5) * 40;
-      const startY = 50;
-      const duration = 1 + Math.random() * 2;
-      const delay = Math.random() * 0.5;
-      
-      heart.style.width = `${size}px`;
-      heart.style.height = `${size}px`;
-      heart.style.left = `${startX}%`;
-      heart.style.top = `${startY}%`;
-      heart.style.opacity = '0.8';
-      heart.style.animation = `explodeHeart ${duration}s ease-out ${delay}s forwards`;
-      
-      const colors = ['#ff6b81', '#ff8fa3', '#ffb3b3'];
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      heart.style.background = color;
-      
-      floatingHearts.appendChild(heart);
-      
-      // Remove after animation
-      setTimeout(() => {
-        if (heart.parentNode) {
-          heart.remove();
-        }
-      }, (duration + delay) * 1000);
-    }
-    
-    // Add explosion animation
-    const explodeStyle = document.createElement('style');
-    explodeStyle.textContent = `
-      @keyframes explodeHeart {
-        0% {
-          transform: translate(0, 0) rotate(45deg) scale(0);
-          opacity: 0;
-        }
-        20% {
-          opacity: 0.8;
-          transform: translate(0, 0) rotate(45deg) scale(1);
-        }
-        100% {
-          transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * -200 - 100}px) rotate(45deg) scale(0);
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.appendChild(explodeStyle);
+    }, 1500);
   }
 
   // Navigation Functions
-  function backToInput() { 
-    carouselPage.style.display = 'none'; 
-    birthdayInputPage.style.display = 'flex'; 
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-  
-  function goToMessage() { 
-    carouselPage.style.display = 'none'; 
-    messagePage.style.display = 'flex'; 
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-  
-  function backToCarousel() { 
-    messagePage.style.display = 'none'; 
-    carouselPage.style.display = 'flex'; 
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-  
-  // Enter key support
-  singleDateInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      validateAndProceed();
-    }
-  });
-
-  // Soft particle system
-  (function(){
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let w = canvas.width = innerWidth;
-    let h = canvas.height = innerHeight;
-    const particles = [];
-    const COUNT = Math.round((w*h)/90000);
-    const colors = ['#ffd6e0','#d9f0ff','#e8f7ee','#fff3d9','#f5e8ff'];
-    function rand(min,max){return Math.random()*(max-min)+min;}
-    function Particle(){this.reset();}
-    Particle.prototype.reset=function(){this.x=rand(0,w);this.y=rand(0,h);this.vx=rand(-0.15,0.15);this.vy=rand(-0.2,0.2);this.size=rand(20,70);this.alpha=rand(0.06,0.22);this.color=colors[Math.floor(rand(0,colors.length))];this.life=rand(200,800);this.age=0;};
-    Particle.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;this.age++; if(this.age>this.life||this.x<-200||this.x>w+200||this.y<-200||this.y>h+200)this.reset();};
-    Particle.prototype.draw=function(ctx){ctx.beginPath();ctx.fillStyle=this.color;ctx.globalAlpha=this.alpha;ctx.ellipse(this.x,this.y,this.size,this.size*0.6,0,0,Math.PI*2);ctx.fill(); ctx.globalAlpha=1;};
-    function init(){w=canvas.width=innerWidth; h=canvas.height=innerHeight; particles.length=0; for(let i=0;i<Math.max(8,COUNT);i++)particles.push(new Particle());}
-    function loop(){ctx.clearRect(0,0,w,h); for(let p of particles){p.update(); p.draw(ctx);} requestAnimationFrame(loop);}
-    window.addEventListener('resize',()=>{init();});
-    init(); loop();
-  })();
-
-  // Fade-in paragraphs on scroll
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {threshold:0.2});
-  document.querySelectorAll('.final-message p').forEach(p => observer.observe(p));
-</script>
-
-</body>
-</html>. Can you believe you're turning 18? Hehe, too old, right? I still remember the first time I saw you — it was in Roxas. Something about you immediately caught my attention, and I can't help but smile at how funny and strange it felt.</p>
-
-    <p>I wonder if you even remember that first glance, but it stuck with me. I knew there was something special about you, something I had never felt before. Then the next time I saw you was in school, and you were a little nervous — maybe because of me? Every little moment, every laugh, every awkward pause, and all the small things we shared, I remember them like they happened yesterday.</p>
-
-    <p>Thinking about how time has flown, from that first encounter to now, it amazes me how much we have experienced, how many laughs we've shared, and how much we have grown. Now it's your birthday! I hope this day fills your heart with joy and that you feel loved, not only by me but by everyone who truly cares about you.</p>
-
-    <p>I am so proud of you and everything you have achieved. Remember to always be kind to yourself, take care of your body, your heart, and your mind. Eat on time, pray before you sleep, pray before you drive, and never forget to thank God for the little and big things in life.</p>
-
-    <p>Even though I am not there with you physically or online, know that you are always in my heart, and I think of you more than you could ever imagine. I am sorry for leaving you like that — you did not deserve me — and I hope you can forgive me someday. You are one of the most precious parts of my life, and I hope you always feel the love and care that surrounds you, whether I am there or not.</p>
-
-    <p>Happy 18th birthday, my greatest love! May this day be filled with laughter, joy, and people who make you feel truly special. May your heart always be light, your smile always be real, and your journey ahead be filled with happiness, success, and love.</p>
-
-    <p>I hope you continue to follow your dreams, grow stronger, and embrace life with courage and joy. And remember, no matter where life takes us, a part of my heart will always be grateful that I knew you this closely. Enjoy your special day, Irish Kha, and always remember that you are loved, cherished, and unforgettable.</p>
-
-    <p>Every laugh, every small moment, every memory — they will always be a part of me. Once again, Happy 18th birthday again. No matter how far life takes us, a part of my heart will always be grateful that it once knew you this closely.</p>
-
-  </div>
-</section>
-
-<!-- Music Controls -->
-<div class="music-controls" id="musicControls" style="display: none;">
-  <button class="music-btn" id="playPauseBtn">⏸️</button>
-  <button class="music-btn" id="muteBtn">🔊</button>
-  <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
-</div>
-
-<!-- Audio Element for Birthday Music - FIXED SOURCE -->
-<audio id="birthdayMusic" loop preload="auto">
-  <!-- Reliable Happy Birthday Music Source -->
-  <source src="https://www.bensound.com/bensound-music/bensound-happybirthday.mp3" type="audio/mpeg">
-  <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-443.mp3" type="audio/mpeg">
-  <!-- Fallback local reference -->
-  <source src="happy-birthday.mp3" type="audio/mpeg">
-</audio>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // DOM Elements
-  const birthdayInputPage = document.getElementById('birthdayInputPage');
-  const carouselPage = document.getElementById('carouselPage');
-  const messagePage = document.getElementById('messagePage');
-  const singleDateInput = document.getElementById('singleDate');
-  const hintText = document.getElementById('hintText');
-  const birthdayMusic = document.getElementById('birthdayMusic');
-  const musicControls = document.getElementById('musicControls');
-  const musicIndicator = document.getElementById('musicIndicator');
-  const playPauseBtn = document.getElementById('playPauseBtn');
-  const muteBtn = document.getElementById('muteBtn');
-  const volumeSlider = document.getElementById('volumeSlider');
-  const floatingHearts = document.getElementById('floatingHearts');
-  const musicPermissionOverlay = document.getElementById('musicPermissionOverlay');
-
-  // Music State
-  let isMusicPlaying = false;
-  let isMuted = false;
-  let lastVolume = 0.5;
-  let musicPermissionGranted = false;
-
-  // Initialize music volume
-  birthdayMusic.volume = lastVolume;
-
-  // Show music permission overlay immediately
-  window.addEventListener('load', function() {
-    // Show permission overlay
-    musicPermissionOverlay.style.display = 'flex';
-    
-    // Preload the music
-    birthdayMusic.load();
-    
-    // Create floating hearts
-    createFloatingHearts();
-  });
-
-  // Enable Music Permission Function
-  function enableMusicPermission() {
-    musicPermissionGranted = true;
-    musicPermissionOverlay.style.display = 'none';
+  function backToInput() {
+    carouselPage.style.display = 'none';
     birthdayInputPage.style.display = 'flex';
-    
-    // Try to play a tiny bit of silent audio to get permission (this is a common workaround)
-    const silentAudio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
-    silentAudio.play().then(() => {
-      silentAudio.pause();
-      console.log('Music permission granted');
-    }).catch(err => {
-      console.log('Could not get audio permission automatically');
-    });
-    
-    // Focus on input
-    setTimeout(() => {
-      singleDateInput.focus();
-    }, 300);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Create floating hearts
-  function createFloatingHearts() {
-    for (let i = 0; i < 15; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'floating-heart';
-      
-      // Random properties
-      const size = 5 + Math.random() * 15;
-      const startX = Math.random() * 100;
-      const duration = 3 + Math.random() * 4;
-      const delay = Math.random() * 2;
-      const opacity = 0.3 + Math.random() * 0.7;
-      
-      heart.style.width = `${size}px`;
-      heart.style.height = `${size}px`;
-      heart.style.left = `${startX}%`;
-      heart.style.bottom = '-20px';
-      heart.style.opacity = opacity;
-      heart.style.animation = `floatUp ${duration}s linear ${delay}s infinite`;
-      
-      // Set heart color
-      const colors = ['#ff6b81', '#ff8fa3', '#ffb3b3', '#ffd6e0'];
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      heart.style.background = color;
-      
-      floatingHearts.appendChild(heart);
-    }
-  }
-
-  // Floating hearts animation
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(45deg) scale(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-        transform: translateY(0) rotate(45deg) scale(1);
-      }
-      90% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(45deg) scale(0);
-        opacity: 0;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Play Birthday Music Function
-  function playBirthdayMusic() {
-    if (!musicPermissionGranted) {
-      // Show permission overlay again
-      musicPermissionOverlay.style.display = 'flex';
-      return;
-    }
+  function goToMessage() {
+    carouselPage.style.display = 'none';
+    messagePage.style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     
-    if (isMusicPlaying) return;
-    
-    birthdayMusic.play()
-      .then(() => {
-        isMusicPlaying = true;
-        musicControls.style.display = 'flex';
-        musicIndicator.style.display = 'flex';
-        playPauseBtn.innerHTML = '⏸️';
-        birthdayMusic.volume = lastVolume;
-        volumeSlider.value = lastVolume * 100;
-        
-        console.log('Birthday music started successfully!');
-      })
-      .catch(error => {
-        console.error('Music playback failed:', error);
-        
-        // Show error message
-        if (hintText) {
-          hintText.innerHTML = '⚠️ Could not play music. Click the page first, then try again.';
-          hintText.style.color = '#ff6b81';
-        }
-        
-        // Try to get permission by having user click
-        document.addEventListener('click', function retryMusic() {
-          document.removeEventListener('click', retryMusic);
-          playBirthdayMusic();
-        }, { once: true });
-      });
-  }
-
-  // Music Control Functions
-  function togglePlayPause() {
-    if (!isMusicPlaying) {
-      playBirthdayMusic();
-    } else {
-      if (birthdayMusic.paused) {
-        birthdayMusic.play();
-        playPauseBtn.innerHTML = '⏸️';
-      } else {
-        birthdayMusic.pause();
-        playPauseBtn.innerHTML = '▶️';
-      }
-    }
-  }
-
-  function toggleMute() {
-    isMuted = !isMuted;
-    if (isMuted) {
-      birthdayMusic.volume = 0;
-      muteBtn.innerHTML = '🔇';
-      muteBtn.classList.add('muted');
-    } else {
-      birthdayMusic.volume = lastVolume;
-      muteBtn.innerHTML = '🔊';
-      muteBtn.classList.remove('muted');
-    }
-  }
-
-  function updateVolume() {
-    lastVolume = volumeSlider.value / 100;
-    if (!isMuted) {
-      birthdayMusic.volume = lastVolume;
-    }
-  }
-
-  // Set up music controls
-  playPauseBtn.addEventListener('click', togglePlayPause);
-  muteBtn.addEventListener('click', toggleMute);
-  volumeSlider.addEventListener('input', updateVolume);
-
-  // Improved Date Validation (Accepts multiple formats)
-  function parseBirthdayDate(input) {
-    if (!input) return null;
-    
-    const cleaned = input.trim().toLowerCase();
-    
-    // Try different date formats
-    const formats = [
-      // December 08, 2007
-      /^(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2}),?\s+(\d{4})$/i,
-      // 12/08/2007 or 12-08-2007
-      /^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/,
-      // Dec 08, 2007
-      /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s+(\d{1,2}),?\s+(\d{4})$/i,
-      // 2007-12-08
-      /^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/
-    ];
-    
-    const monthNames = {
-      'january': 0, 'february': 1, 'march': 2, 'april': 3, 'may': 4, 'june': 5,
-      'july': 6, 'august': 7, 'september': 8, 'october': 9, 'november': 10, 'december': 11,
-      'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'may': 4, 'jun': 5,
-      'jul': 6, 'aug': 7, 'sep': 8, 'oct': 9, 'nov': 10, 'dec': 11
-    };
-    
-    for (const format of formats) {
-      const match = cleaned.match(format);
-      if (match) {
-        let month, day, year;
-        
-        if (format === formats[0] || format === formats[2]) {
-          // Month name format
-          month = monthNames[match[1].toLowerCase()];
-          day = parseInt(match[2]);
-          year = parseInt(match[3]);
-        } else if (format === formats[1]) {
-          // MM/DD/YYYY format
-          month = parseInt(match[1]) - 1;
-          day = parseInt(match[2]);
-          year = parseInt(match[3]);
-        } else if (format === formats[3]) {
-          // YYYY-MM-DD format
-          year = parseInt(match[1]);
-          month = parseInt(match[2]) - 1;
-          day = parseInt(match[3]);
-        }
-        
-        // Validate the date
-        const date = new Date(year, month, day);
-        if (date.getFullYear() === year && 
-            date.getMonth() === month && 
-            date.getDate() === day &&
-            !isNaN(date.getTime())) {
-          return date;
-        }
-      }
-    }
-    
-    // Try native Date.parse as fallback
-    const parsed = Date.parse(input);
-    if (!isNaN(parsed)) {
-      const date = new Date(parsed);
-      return date;
-    }
-    
-    return null;
-  }
-
-  // Main Validation Function
-  function validateAndProceed() {
-    const val = singleDateInput.value.trim();
-    
-    if (!val) {
-      hintText.textContent = 'Please enter your birthday (December 08, 2007 or 12/08/2007)';
-      hintText.style.color = '#ff6b81';
-      return;
-    }
-    
-    const dateObj = parseBirthdayDate(val);
-    
-    if (!dateObj) {
-      hintText.textContent = 'Invalid date format. Use: December 08, 2007 or 12/08/2007';
-      hintText.style.color = '#ff6b81';
-      return;
-    }
-    
-    // Check if date is December 8, 2007
-    const correctDate = new Date(2007, 11, 8); // December is month 11 (0-indexed)
-    
-    if (dateObj.getFullYear() !== 2007 || 
-        dateObj.getMonth() !== 11 || 
-        dateObj.getDate() !== 8) {
-      hintText.textContent = 'That\'s not the correct birthday. Try again!';
-      hintText.style.color = '#ff6b81';
-      return;
-    }
-    
-    // SUCCESS! Correct birthday entered
-    hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉';
-    hintText.style.color = '#ff6b81';
-    
-    // Play birthday music
-    playBirthdayMusic();
-    
-    // Create heart explosion effect
-    createHeartExplosion();
-    
-    // Proceed to next page after delay
-    setTimeout(() => {
-      birthdayInputPage.style.display = 'none';
-      carouselPage.style.display = 'flex';
-      window.scrollTo({top: 0, behavior: 'smooth'});
-    }, 2000);
-  }
-
-  // Heart Explosion Effect
-  function createHeartExplosion() {
-    for (let i = 0; i < 30; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'floating-heart';
-      
-      const size = 10 + Math.random() * 20;
-      const startX = 50 + (Math.random() - 0.5) * 40;
-      const startY = 50;
-      const duration = 1 + Math.random() * 2;
-      const delay = Math.random() * 0.5;
-      
-      heart.style.width = `${size}px`;
-      heart.style.height = `${size}px`;
-      heart.style.left = `${startX}%`;
-      heart.style.top = `${startY}%`;
-      heart.style.opacity = '0.8';
-      heart.style.animation = `explodeHeart ${duration}s ease-out ${delay}s forwards`;
-      
-      const colors = ['#ff6b81', '#ff8fa3', '#ffb3b3'];
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      heart.style.background = color;
-      
-      floatingHearts.appendChild(heart);
-      
-      // Remove after animation
+    // Animate paragraphs one by one
+    const paragraphs = document.querySelectorAll('.final-message p');
+    paragraphs.forEach((p, index) => {
       setTimeout(() => {
-        if (heart.parentNode) {
-          heart.remove();
-        }
-      }, (duration + delay) * 1000);
-    }
-    
-    // Add explosion animation
-    const explodeStyle = document.createElement('style');
-    explodeStyle.textContent = `
-      @keyframes explodeHeart {
-        0% {
-          transform: translate(0, 0) rotate(45deg) scale(0);
-          opacity: 0;
-        }
-        20% {
-          opacity: 0.8;
-          transform: translate(0, 0) rotate(45deg) scale(1);
-        }
-        100% {
-          transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * -200 - 100}px) rotate(45deg) scale(0);
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.appendChild(explodeStyle);
+        p.classList.add('visible');
+      }, index * 500); // 0.5 seconds between each paragraph
+    });
   }
 
-  // Navigation Functions
-  function backToInput() { 
-    carouselPage.style.display = 'none'; 
-    birthdayInputPage.style.display = 'flex'; 
-    window.scrollTo({top: 0, behavior: 'smooth'});
+  function backToCarousel() {
+    messagePage.style.display = 'none';
+    carouselPage.style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  
-  function goToMessage() { 
-    carouselPage.style.display = 'none'; 
-    messagePage.style.display = 'flex'; 
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-  
-  function backToCarousel() { 
-    messagePage.style.display = 'none'; 
-    carouselPage.style.display = 'flex'; 
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-  
-  // Enter key support
-  singleDateInput.addEventListener('keydown', e => {
+
+  // Allow Enter key to submit
+  singleDateInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       validateAndProceed();
     }
   });
-
-  // Soft particle system
-  (function(){
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let w = canvas.width = innerWidth;
-    let h = canvas.height = innerHeight;
-    const particles = [];
-    const COUNT = Math.round((w*h)/90000);
-    const colors = ['#ffd6e0','#d9f0ff','#e8f7ee','#fff3d9','#f5e8ff'];
-    function rand(min,max){return Math.random()*(max-min)+min;}
-    function Particle(){this.reset();}
-    Particle.prototype.reset=function(){this.x=rand(0,w);this.y=rand(0,h);this.vx=rand(-0.15,0.15);this.vy=rand(-0.2,0.2);this.size=rand(20,70);this.alpha=rand(0.06,0.22);this.color=colors[Math.floor(rand(0,colors.length))];this.life=rand(200,800);this.age=0;};
-    Particle.prototype.update=function(){this.x+=this.vx;this.y+=this.vy;this.age++; if(this.age>this.life||this.x<-200||this.x>w+200||this.y<-200||this.y>h+200)this.reset();};
-    Particle.prototype.draw=function(ctx){ctx.beginPath();ctx.fillStyle=this.color;ctx.globalAlpha=this.alpha;ctx.ellipse(this.x,this.y,this.size,this.size*0.6,0,0,Math.PI*2);ctx.fill(); ctx.globalAlpha=1;};
-    function init(){w=canvas.width=innerWidth; h=canvas.height=innerHeight; particles.length=0; for(let i=0;i<Math.max(8,COUNT);i++)particles.push(new Particle());}
-    function loop(){ctx.clearRect(0,0,w,h); for(let p of particles){p.update(); p.draw(ctx);} requestAnimationFrame(loop);}
-    window.addEventListener('resize',()=>{init();});
-    init(); loop();
-  })();
-
-  // Fade-in paragraphs on scroll
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {threshold:0.2});
-  document.querySelectorAll('.final-message p').forEach(p => observer.observe(p));
 </script>
-
 </body>
 </html>

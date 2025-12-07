@@ -90,10 +90,71 @@
     opacity:1; transform: translateY(0);
   }
 
+  /* Heart Animation X */
+  #heartAnimation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    display: none;
+  }
+  
+  .heart {
+    position: absolute;
+    font-size: 24px;
+    color: #ff6b81;
+    animation: heartFloat 3s linear forwards;
+    filter: drop-shadow(0 0 8px rgba(255, 107, 129, 0.7));
+  }
+  
+  @keyframes heartFloat {
+    0% {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-100vh) rotate(360deg) scale(1.5);
+    }
+  }
+  
+  /* Secret trigger button */
+  .secret-trigger {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 107, 129, 0.9);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .secret-trigger:hover {
+    transform: scale(1.1);
+    background: rgba(255, 107, 129, 1);
+  }
+  
   @media(max-width:768px){
     .top-controls, .message-back{padding:6px 10px;}
     .btn-primary-custom{padding:8px 18px;}
     .final-message{padding:18px;}
+    .secret-trigger {
+      bottom: 10px;
+      right: 10px;
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+    }
   }
 </style>
 </head>
@@ -106,6 +167,9 @@
 </div>
 
 <canvas id="particleCanvas"></canvas>
+
+<!-- Heart Animation X Container -->
+<div id="heartAnimation"></div>
 
 <!-- Birthday Input Page -->
 <section id="birthdayInputPage" class="page">
@@ -158,11 +222,11 @@
   <div class="final-message">
     <h2>For You</h2>
 
-    <p>Hi! Irish Kha, my greatest love, my darling, my baby, my teerak, mi amor, my love, my honey, my sweetheart. Can you believe you’re turning 18? Hehe, too old, right? I still remember the first time I saw you — it was in Roxas. Something about you immediately caught my attention, and I can’t help but smile at how funny and strange it felt.</p>
+    <p>Hi! Irish Kha, my greatest love, my darling, my baby, my teerak, mi amor, my love, my honey, my sweetheart. Can you believe you're turning 18? Hehe, too old, right? I still remember the first time I saw you — it was in Roxas. Something about you immediately caught my attention, and I can't help but smile at how funny and strange it felt.</p>
 
     <p>I wonder if you even remember that first glance, but it stuck with me. I knew there was something special about you, something I had never felt before. Then the next time I saw you was in school, and you were a little nervous — maybe because of me? Every little moment, every laugh, every awkward pause, and all the small things we shared, I remember them like they happened yesterday.</p>
 
-    <p>Thinking about how time has flown, from that first encounter to now, it amazes me how much we have experienced, how many laughs we’ve shared, and how much we have grown. Now it’s your birthday! I hope this day fills your heart with joy and that you feel loved, not only by me but by everyone who truly cares about you.</p>
+    <p>Thinking about how time has flown, from that first encounter to now, it amazes me how much we have experienced, how many laughs we've shared, and how much we have grown. Now it's your birthday! I hope this day fills your heart with joy and that you feel loved, not only by me but by everyone who truly cares about you.</p>
 
     <p>I am so proud of you and everything you have achieved. Remember to always be kind to yourself, take care of your body, your heart, and your mind. Eat on time, pray before you sleep, pray before you drive, and never forget to thank God for the little and big things in life.</p>
 
@@ -177,6 +241,9 @@
   </div>
 </section>
 
+<!-- Secret Trigger Button -->
+<button class="secret-trigger" id="heartTrigger" title="Secret Heart Animation">❤️</button>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   const birthdayInputPage = document.getElementById('birthdayInputPage');
@@ -184,6 +251,8 @@
   const messagePage = document.getElementById('messagePage');
   const singleDateInput = document.getElementById('singleDate');
   const hintText = document.getElementById('hintText');
+  const heartAnimation = document.getElementById('heartAnimation');
+  const heartTrigger = document.getElementById('heartTrigger');
 
   function tryParseSingleLineDate(str){
     if(!str) return null;
@@ -252,6 +321,88 @@
     });
   }, {threshold:0.2});
   document.querySelectorAll('.final-message p').forEach(p => observer.observe(p));
+
+  // Heart Animation X
+  function createHeartAnimation() {
+    heartAnimation.style.display = 'block';
+    heartAnimation.innerHTML = '';
+    
+    // Create multiple hearts
+    const heartCount = 50;
+    const heartEmojis = ['❤️', '💖', '💗', '💓', '💘', '💕', '💞'];
+    
+    for (let i = 0; i < heartCount; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      
+      // Random position at bottom
+      const startX = Math.random() * window.innerWidth;
+      heart.style.left = `${startX}px`;
+      heart.style.bottom = '0px';
+      
+      // Random animation properties
+      const duration = 2 + Math.random() * 2;
+      const delay = Math.random() * 1.5;
+      const size = 20 + Math.random() * 30;
+      
+      heart.style.fontSize = `${size}px`;
+      heart.style.animationDuration = `${duration}s`;
+      heart.style.animationDelay = `${delay}s`;
+      
+      heartAnimation.appendChild(heart);
+    }
+    
+    // Hide after animation completes
+    setTimeout(() => {
+      heartAnimation.style.display = 'none';
+      heartAnimation.innerHTML = '';
+    }, 4000);
+  }
+
+  // Trigger heart animation on button click
+  heartTrigger.addEventListener('click', createHeartAnimation);
+
+  // Also trigger heart animation when reaching the message page
+  const originalGoToMessage = goToMessage;
+  goToMessage = function() {
+    carouselPage.style.display = 'none';
+    messagePage.style.display = 'flex';
+    window.scrollTo({top:0, behavior:'smooth'});
+    
+    // Trigger heart animation after a short delay when reaching message page
+    setTimeout(createHeartAnimation, 500);
+  };
+
+  // Also trigger on correct birthday entry
+  const originalValidateAndProceed = validateAndProceed;
+  validateAndProceed = function() {
+    const val = singleDateInput.value.trim();
+    const dateObj = tryParseSingleLineDate(val);
+    if(!val){
+      hintText.textContent = 'Please enter birthday: December 08, 2007';
+      hintText.style.color='#b23'; return;
+    }
+    if(!dateObj){
+      hintText.textContent='Invalid format. Use: December 08, 2007';
+      hintText.style.color='#b23'; return;
+    }
+
+    const correctDate = new Date(2007,11,8);
+    if(dateObj.getFullYear() !== correctDate.getFullYear() || dateObj.getMonth() !== correctDate.getMonth() || dateObj.getDate() !== correctDate.getDate()){
+      hintText.textContent='Oops! Wrong birthday. Try again.';
+      hintText.style.color='#b23'; return;
+    }
+
+    // Trigger heart animation on correct birthday
+    createHeartAnimation();
+    
+    setTimeout(() => {
+      birthdayInputPage.style.display='none';
+      carouselPage.style.display='flex';
+      window.scrollTo({top:0, behavior:'smooth'});
+    }, 1500);
+  };
 </script>
 
 </body>

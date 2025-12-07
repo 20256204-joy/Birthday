@@ -251,174 +251,145 @@
     font-size:0.9rem;
   }
 
-  /* Music Permission Overlay */
-  .music-permission-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(10px);
-  }
-  
-  .music-permission-card {
-    background: linear-gradient(135deg, #fff, #f9f9f9);
-    padding: 50px;
-    border-radius: 30px;
-    text-align: center;
-    max-width: 600px;
-    margin: 20px;
-    box-shadow: 0 25px 70px rgba(255, 107, 129, 0.4);
-    border: 3px solid #ff6b81;
-    animation: fadeInScale 0.6s ease;
-  }
-  
-  .music-permission-card h2 {
-    color: #ff6b81;
-    margin-bottom: 25px;
-    font-size: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-  }
-  
-  .music-permission-card p {
-    color: #666;
-    margin-bottom: 35px;
-    font-size: 1.2rem;
-    line-height: 1.7;
-  }
-  
-  .enable-music-btn {
-    padding: 18px 50px;
-    background: linear-gradient(90deg, #ff6b81, #ff8fa3);
-    border: none;
-    border-radius: 50px;
-    color: white;
-    font-weight: 700;
-    font-size: 1.3rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(255, 107, 129, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .enable-music-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: 0.5s;
-  }
-  
-  .enable-music-btn:hover::before {
-    left: 100%;
-  }
-  
-  .enable-music-btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 15px 40px rgba(255, 107, 129, 0.7);
-  }
-  
-  .music-note {
-    font-size: 2rem;
-    animation: bounce 1s infinite alternate;
-  }
-  
-  @keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  
-  @keyframes bounce {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
-  }
-
-  /* Music controls */
-  .music-controls {
+  /* YouTube Music Player */
+  .youtube-player {
     position: fixed;
     bottom: 20px;
-    left: 20px;
+    right: 20px;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     z-index: 1001;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    opacity: 0;
-    transform: translateY(20px);
+    display: none;
     transition: all 0.5s ease;
+    border: 2px solid #ff6b81;
   }
   
-  .music-controls.visible {
-    opacity: 1;
-    transform: translateY(0);
+  .youtube-player.visible {
+    display: block;
+    animation: slideIn 0.5s ease;
   }
   
-  .music-btn {
-    background: rgba(255, 107, 129, 0.9);
-    color: white;
+  .player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .player-header h4 {
+    color: #ff6b81;
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  
+  .close-player {
+    background: none;
     border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 22px;
+    font-size: 1.2rem;
+    color: #ff6b81;
     cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
-    transition: all 0.3s ease;
-  }
-  
-  .music-btn:hover {
-    transform: scale(1.1);
-    background: rgba(255, 107, 129, 1);
-  }
-  
-  .music-btn.muted {
-    background: rgba(100, 100, 100, 0.7);
-  }
-  
-  .volume-slider {
-    width: 120px;
-    height: 6px;
-    -webkit-appearance: none;
-    background: rgba(255, 107, 129, 0.3);
-    border-radius: 5px;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-  }
-  
-  .volume-slider:hover {
-    opacity: 1;
-  }
-  
-  .volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
     border-radius: 50%;
-    background: #ff6b81;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: all 0.3s;
   }
   
+  .close-player:hover {
+    background: #ff6b81;
+    color: white;
+  }
+  
+  .youtube-iframe {
+    width: 100%;
+    height: 170px;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .player-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .player-btn {
+    flex: 1;
+    padding: 8px;
+    background: #ff6b81;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .player-btn:hover {
+    background: #ff5a72;
+    transform: translateY(-2px);
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Music Toggle Button */
+  .music-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #ff6b81;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(255, 107, 129, 0.5);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .music-toggle-btn:hover {
+    transform: scale(1.1);
+    background: #ff5a72;
+    box-shadow: 0 8px 25px rgba(255, 107, 129, 0.7);
+  }
+  
+  .music-toggle-btn.playing {
+    background: #4CAF50;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+  }
+
+  /* Music Indicator */
   .music-indicator {
     position: fixed;
     top: 20px;
@@ -500,28 +471,20 @@
     .top-controls, .message-back{padding:6px 10px;}
     .btn-primary-custom{padding:12px 25px;}
     .final-message{padding:18px;}
-    .music-permission-card {
-      padding: 30px 20px;
-      margin: 15px;
+    .youtube-player {
+      width: 90%;
+      right: 5%;
+      bottom: 80px;
     }
-    .music-permission-card h2 {
-      font-size: 1.8rem;
+    .youtube-iframe {
+      height: 200px;
     }
-    .enable-music-btn {
-      padding: 15px 30px;
-      font-size: 1.1rem;
-    }
-    .music-controls {
-      bottom: 10px;
-      left: 10px;
-    }
-    .music-btn {
-      width: 45px;
-      height: 45px;
+    .music-toggle-btn {
+      width: 50px;
+      height: 50px;
       font-size: 20px;
-    }
-    .volume-slider {
-      width: 90px;
+      bottom: 15px;
+      right: 15px;
     }
     .music-indicator {
       top: 10px;
@@ -542,31 +505,13 @@
 
 <canvas id="particleCanvas"></canvas>
 
-<!-- Music Permission Overlay -->
-<div class="music-permission-overlay" id="musicPermissionOverlay">
-  <div class="music-permission-card">
-    <h2>
-      <span class="music-note">🎵</span>
-      HAPPY BIRTHDAY MUSIC
-      <span class="music-note">🎵</span>
-    </h2>
-    <p>To make your 18th birthday celebration truly special, please enable the "Happy Birthday to You" music! <br><br>The traditional birthday song will play when you enter your birthday.</p>
-    <button class="enable-music-btn" id="enableMusicBtn">
-      <i class="fas fa-music"></i> ENABLE BIRTHDAY MUSIC
-    </button>
-    <p style="margin-top:20px; font-size:1rem; color:#999;">
-      <i class="fas fa-volume-up"></i> You can control the volume or mute anytime
-    </p>
-  </div>
-</div>
-
 <!-- Music Indicator -->
 <div class="music-indicator" id="musicIndicator">
-  <span class="note">🎂</span> Happy Birthday to You!
+  <span class="note">🎵</span> Happy Birthday Music Playing!
 </div>
 
 <!-- Birthday Input Page -->
-<section id="birthdayInputPage" class="page" style="display:none;">
+<section id="birthdayInputPage" class="page">
   <div class="birthday-card">
     <div class="floating-hearts" id="floatingHearts"></div>
     
@@ -653,116 +598,72 @@
   </div>
 </section>
 
-<!-- Music Controls -->
-<div class="music-controls" id="musicControls">
-  <button class="music-btn" id="playPauseBtn">▶️</button>
-  <button class="music-btn" id="muteBtn">🔊</button>
-  <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
+<!-- YouTube Music Player -->
+<div class="youtube-player" id="youtubePlayer">
+  <div class="player-header">
+    <h4><i class="fas fa-music"></i> Happy Birthday Music</h4>
+    <button class="close-player" id="closePlayer">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <iframe 
+    class="youtube-iframe" 
+    id="youtubeIframe"
+    src="https://www.youtube.com/embed/5u4xTa3LR2U?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&loop=1&playlist=5u4xTa3LR2U" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+  <div class="player-controls">
+    <button class="player-btn" id="playBtn">
+      <i class="fas fa-play"></i> Play
+    </button>
+    <button class="player-btn" id="pauseBtn">
+      <i class="fas fa-pause"></i> Pause
+    </button>
+    <button class="player-btn" id="muteBtn">
+      <i class="fas fa-volume-up"></i> Mute
+    </button>
+  </div>
 </div>
 
-<!-- Audio Element with REAL HAPPY BIRTHDAY MUSIC -->
-<audio id="birthdayMusic" loop>
-  <!-- Option 1: Direct Happy Birthday MP3 from reliable source -->
-  <source src="https://www.mfiles.co.uk/mp3-downloads/happy-birthday-piano.mp3" type="audio/mpeg">
-  
-  <!-- Option 2: Piano version of Happy Birthday -->
-  <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-443.mp3" type="audio/mpeg">
-  
-  <!-- Option 3: Traditional Happy Birthday (most likely to work) -->
-  <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Happy-birthday-to-you-music-box.mp3" type="audio/mpeg">
-  
-  <!-- Option 4: YouTube audio extract of Happy Birthday -->
-  <source src="https://www.bensound.com/bensound-music/bensound-happybirthday.mp3" type="audio/mpeg">
-  
-  Your browser does not support the audio element.
-</audio>
+<!-- Music Toggle Button -->
+<button class="music-toggle-btn" id="musicToggleBtn">
+  <i class="fas fa-music"></i>
+</button>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   // DOM Elements
-  const musicPermissionOverlay = document.getElementById('musicPermissionOverlay');
-  const enableMusicBtn = document.getElementById('enableMusicBtn');
   const birthdayInputPage = document.getElementById('birthdayInputPage');
   const carouselPage = document.getElementById('carouselPage');
   const messagePage = document.getElementById('messagePage');
   const singleDateInput = document.getElementById('singleDate');
   const continueBtn = document.getElementById('continueBtn');
   const hintText = document.getElementById('hintText');
-  const birthdayMusic = document.getElementById('birthdayMusic');
-  const musicControls = document.getElementById('musicControls');
   const musicIndicator = document.getElementById('musicIndicator');
-  const playPauseBtn = document.getElementById('playPauseBtn');
+  const youtubePlayer = document.getElementById('youtubePlayer');
+  const youtubeIframe = document.getElementById('youtubeIframe');
+  const musicToggleBtn = document.getElementById('musicToggleBtn');
+  const closePlayer = document.getElementById('closePlayer');
+  const playBtn = document.getElementById('playBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
   const muteBtn = document.getElementById('muteBtn');
-  const volumeSlider = document.getElementById('volumeSlider');
   const floatingHearts = document.getElementById('floatingHearts');
 
-  // Music State
+  // YouTube Player State
+  let youtubePlayerReady = false;
   let isMusicPlaying = false;
   let isMuted = false;
-  let lastVolume = 0.5;
-  let musicEnabled = false;
-  let audioContext;
 
-  // Initialize music volume
-  birthdayMusic.volume = lastVolume;
-
-  // Show music permission overlay immediately
+  // Initialize on page load
   window.addEventListener('load', () => {
-    // Show permission overlay with a small delay for visual effect
-    setTimeout(() => {
-      musicPermissionOverlay.style.display = 'flex';
-    }, 500);
-    
-    // Create floating hearts
     createFloatingHearts();
+    singleDateInput.focus();
+    
+    // Update hint
+    hintText.innerHTML = 'Enter your birthday to unlock the special celebration! <br><small>🎵 Click the music button after entering birthday!</small>';
   });
-
-  // Enable Music Function
-  enableMusicBtn.addEventListener('click', () => {
-    // Hide permission overlay
-    musicPermissionOverlay.style.display = 'none';
-    
-    // Show birthday input page
-    birthdayInputPage.style.display = 'flex';
-    
-    // Initialize audio context
-    initializeAudio();
-    
-    // Focus on input field
-    setTimeout(() => {
-      singleDateInput.focus();
-    }, 300);
-  });
-
-  // Initialize Audio System
-  function initializeAudio() {
-    try {
-      // Create audio context for better browser compatibility
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      
-      // Resume audio context (required by browsers)
-      if (audioContext.state === 'suspended') {
-        audioContext.resume();
-      }
-      
-      // Preload the music
-      birthdayMusic.load();
-      
-      // Mark music as enabled
-      musicEnabled = true;
-      
-      console.log('Audio system initialized successfully');
-      
-      // Show music ready hint
-      hintText.innerHTML = 'Enter your birthday to unlock the special celebration! <br><small>🎵 "Happy Birthday" music is ready!</small>';
-      
-    } catch (error) {
-      console.error('Audio initialization error:', error);
-      // Still try to enable music even if audio context fails
-      musicEnabled = true;
-      hintText.innerHTML = 'Enter your birthday to unlock the special celebration! <br><small>🎵 Music system ready!</small>';
-    }
-  }
 
   // Create floating hearts
   function createFloatingHearts() {
@@ -814,105 +715,109 @@
   `;
   document.head.appendChild(style);
 
-  // Function to play REAL Happy Birthday Music
-  function playBirthdayMusic() {
-    if (!musicEnabled) {
-      // Show permission overlay if music not enabled
-      musicPermissionOverlay.style.display = 'flex';
-      return;
-    }
-    
-    if (isMusicPlaying) return;
-    
-    try {
-      // Resume audio context if suspended
-      if (audioContext && audioContext.state === 'suspended') {
-        audioContext.resume();
+  // YouTube Player API
+  let player;
+  
+  // Load YouTube IFrame API
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // YouTube API callback
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtubeIframe', {
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
       }
-      
-      // Try to play the music
-      const playPromise = birthdayMusic.play();
-      
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          // Success!
-          console.log('🎵 Happy Birthday music is playing!');
-          isMusicPlaying = true;
-          
-          // Show music controls and indicator
-          musicControls.classList.add('visible');
-          musicIndicator.classList.add('visible');
-          playPauseBtn.innerHTML = '⏸️';
-          
-          // Update volume
-          birthdayMusic.volume = lastVolume;
-          volumeSlider.value = lastVolume * 100;
-          
-          // Show success message
-          hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉<br><small>🎵 "Happy Birthday to You" is playing!</small>';
-          hintText.style.color = '#ff6b81';
-          
-        }).catch(error => {
-          console.error('Music play failed:', error);
-          // Fallback: Show controls and let user click play
-          hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉<br><small>🎵 Click the play button below for music!</small>';
-          hintText.style.color = '#ff6b81';
-          musicControls.classList.add('visible');
-        });
-      }
-    } catch (error) {
-      console.error('Error playing music:', error);
-      // Show controls anyway
-      musicControls.classList.add('visible');
-    }
+    });
   }
 
-  // Music Control Functions
-  function togglePlayPause() {
-    if (!musicEnabled) {
-      musicPermissionOverlay.style.display = 'flex';
-      return;
-    }
-    
-    if (birthdayMusic.paused) {
-      birthdayMusic.play().then(() => {
-        isMusicPlaying = true;
-        playPauseBtn.innerHTML = '⏸️';
-        musicIndicator.classList.add('visible');
-      }).catch(error => {
-        console.error('Play failed:', error);
-      });
-    } else {
-      birthdayMusic.pause();
-      playPauseBtn.innerHTML = '▶️';
+  // Player ready callback
+  function onPlayerReady(event) {
+    youtubePlayerReady = true;
+    console.log('YouTube player is ready');
+  }
+
+  // Player state change callback
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+      isMusicPlaying = true;
+      musicToggleBtn.classList.add('playing');
+      musicToggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      musicIndicator.classList.add('visible');
+    } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+      isMusicPlaying = false;
+      musicToggleBtn.classList.remove('playing');
+      musicToggleBtn.innerHTML = '<i class="fas fa-music"></i>';
       musicIndicator.classList.remove('visible');
     }
   }
 
+  // YouTube Player Control Functions
+  function playMusic() {
+    if (player && youtubePlayerReady) {
+      player.playVideo();
+      isMusicPlaying = true;
+    }
+  }
+
+  function pauseMusic() {
+    if (player && youtubePlayerReady) {
+      player.pauseVideo();
+      isMusicPlaying = false;
+    }
+  }
+
   function toggleMute() {
-    isMuted = !isMuted;
-    if (isMuted) {
-      birthdayMusic.volume = 0;
-      muteBtn.innerHTML = '🔇';
-      muteBtn.classList.add('muted');
+    if (player && youtubePlayerReady) {
+      if (isMuted) {
+        player.unMute();
+        muteBtn.innerHTML = '<i class="fas fa-volume-up"></i> Mute';
+        isMuted = false;
+      } else {
+        player.mute();
+        muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i> Unmute';
+        isMuted = true;
+      }
+    }
+  }
+
+  // Show YouTube Player
+  function showYouTubePlayer() {
+    youtubePlayer.classList.add('visible');
+    // Try to play automatically after a short delay
+    setTimeout(() => {
+      if (player && youtubePlayerReady) {
+        playMusic();
+      }
+    }, 1000);
+  }
+
+  // Hide YouTube Player
+  function hideYouTubePlayer() {
+    youtubePlayer.classList.remove('visible');
+    if (isMusicPlaying) {
+      pauseMusic();
+    }
+  }
+
+  // Toggle Music Button
+  function toggleMusicPlayer() {
+    if (youtubePlayer.classList.contains('visible')) {
+      hideYouTubePlayer();
     } else {
-      birthdayMusic.volume = lastVolume;
-      muteBtn.innerHTML = '🔊';
-      muteBtn.classList.remove('muted');
+      showYouTubePlayer();
     }
   }
 
-  function updateVolume() {
-    lastVolume = volumeSlider.value / 100;
-    if (!isMuted) {
-      birthdayMusic.volume = lastVolume;
-    }
-  }
-
-  // Set up music controls
-  playPauseBtn.addEventListener('click', togglePlayPause);
+  // Set up event listeners
+  musicToggleBtn.addEventListener('click', toggleMusicPlayer);
+  closePlayer.addEventListener('click', hideYouTubePlayer);
+  playBtn.addEventListener('click', playMusic);
+  pauseBtn.addEventListener('click', pauseMusic);
   muteBtn.addEventListener('click', toggleMute);
-  volumeSlider.addEventListener('input', updateVolume);
 
   // Date Validation Function (Accepts multiple formats)
   function parseBirthdayDate(input) {
@@ -1013,14 +918,14 @@
     }
     
     // SUCCESS! Correct birthday entered
-    hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉';
+    hintText.innerHTML = '✅ Correct! Happy 18th Birthday! 🎉<br><small>🎵 Click the music button for Happy Birthday song!</small>';
     hintText.style.color = '#ff6b81';
-    
-    // Play the REAL Happy Birthday music
-    playBirthdayMusic();
     
     // Create heart explosion effect
     createHeartExplosion();
+    
+    // Show music toggle button
+    musicToggleBtn.style.display = 'flex';
     
     // Proceed to next page after delay
     setTimeout(() => {
@@ -1142,6 +1047,9 @@
     });
   }, {threshold:0.2});
   document.querySelectorAll('.final-message p').forEach(p => observer.observe(p));
+
+  // Global function for YouTube API
+  window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 </script>
 </body>
 </html>

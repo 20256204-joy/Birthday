@@ -82,7 +82,13 @@
     line-height:1.55;
   }
   .final-message h2{text-align:center; color:var(--accent); margin-bottom:12px;}
-  .final-message p{white-space:pre-wrap; margin-bottom:14px;}
+  .final-message p{
+    white-space:pre-wrap; margin-bottom:14px;
+    opacity:0; transform: translateY(20px); transition: all 0.8s ease-out;
+  }
+  .final-message p.visible{
+    opacity:1; transform: translateY(0);
+  }
 
   @media(max-width:768px){
     .top-controls, .message-back{padding:6px 10px;}
@@ -151,13 +157,23 @@
   <div class="message-back" onclick="backToCarousel()">Back</div>
   <div class="final-message">
     <h2>For You</h2>
-    <p>Hi! Irish Kha, my greatest love, my darling, my baby, my teerak, mi amor, my love, my honey, my sweetheart. Can you believe you’re turning 18? Hehe, too old, right? I still remember the first time I saw you — it was in Roxas. Something about you immediately caught my attention, and I can’t help but smile at how funny and strange it felt. I wonder if you even remember that first glance, but it stuck with me. I knew there was something special about you, something I had never felt before. Then the next time I saw you was in school, and you were a little nervous — maybe because of me? Every little moment, every laugh, every awkward pause, and all the small things we shared, I remember them like they happened yesterday.</p>
 
-    <p>Thinking about how time has flown, from that first encounter to now, it amazes me how much we have experienced, how many laughs we’ve shared, and how much we have grown. Now it’s your birthday! I hope this day fills your heart with joy and that you feel loved, not only by me but by everyone who truly cares about you. I am so proud of you and everything you have achieved. Remember to always be kind to yourself, take care of your body, your heart, and your mind. Eat on time, pray before you sleep, pray before you drive, and never forget to thank God for the little and big things in life.</p>
+    <p>Hi! Irish Kha, my greatest love, my darling, my baby, my teerak, mi amor, my love, my honey, my sweetheart. Can you believe you’re turning 18? Hehe, too old, right? I still remember the first time I saw you — it was in Roxas. Something about you immediately caught my attention, and I can’t help but smile at how funny and strange it felt.</p>
 
-    <p>Even though I am not there with you physically or online, know that you are always in my heart, and I think of you more than you could ever imagine. I am sorry for leaving you like that — you did not deserve me — and I hope you can forgive me someday. You are one of the most precious parts of my life, and I hope you always feel the love and care that surrounds you, whether I am there or not. Happy 18th birthday, my greatest love! May this day be filled with laughter, joy, and people who make you feel truly special.</p>
+    <p>I wonder if you even remember that first glance, but it stuck with me. I knew there was something special about you, something I had never felt before. Then the next time I saw you was in school, and you were a little nervous — maybe because of me? Every little moment, every laugh, every awkward pause, and all the small things we shared, I remember them like they happened yesterday.</p>
 
-    <p>May your heart always be light, your smile always be real, and your journey ahead be filled with happiness, success, and love. I hope you continue to follow your dreams, grow stronger, and embrace life with courage and joy. And remember, no matter where life takes us, a part of my heart will always be grateful that I knew you this closely. Enjoy your special day, Irish Kha, and always remember that you are loved, cherished, and unforgettable. Every laugh, every small moment, every memory — they will always be a part of me. Happy 18th birthday, my love. No matter how far life takes us, a part of my heart will always be grateful that it once knew you this closely.</p>
+    <p>Thinking about how time has flown, from that first encounter to now, it amazes me how much we have experienced, how many laughs we’ve shared, and how much we have grown. Now it’s your birthday! I hope this day fills your heart with joy and that you feel loved, not only by me but by everyone who truly cares about you.</p>
+
+    <p>I am so proud of you and everything you have achieved. Remember to always be kind to yourself, take care of your body, your heart, and your mind. Eat on time, pray before you sleep, pray before you drive, and never forget to thank God for the little and big things in life.</p>
+
+    <p>Even though I am not there with you physically or online, know that you are always in my heart, and I think of you more than you could ever imagine. I am sorry for leaving you like that — you did not deserve me — and I hope you can forgive me someday. You are one of the most precious parts of my life, and I hope you always feel the love and care that surrounds you, whether I am there or not.</p>
+
+    <p>Happy 18th birthday, my greatest love! May this day be filled with laughter, joy, and people who make you feel truly special. May your heart always be light, your smile always be real, and your journey ahead be filled with happiness, success, and love.</p>
+
+    <p>I hope you continue to follow your dreams, grow stronger, and embrace life with courage and joy. And remember, no matter where life takes us, a part of my heart will always be grateful that I knew you this closely. Enjoy your special day, Irish Kha, and always remember that you are loved, cherished, and unforgettable.</p>
+
+    <p>Every laugh, every small moment, every memory — they will always be a part of me. Happy 18th birthday, my love. No matter how far life takes us, a part of my heart will always be grateful that it once knew you this closely.</p>
+
   </div>
 </section>
 
@@ -225,6 +241,17 @@
     window.addEventListener('resize',()=>{init();});
     init(); loop();
   })();
+
+  // Fade-in paragraphs on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.2});
+  document.querySelectorAll('.final-message p').forEach(p => observer.observe(p));
 </script>
 
 </body>
